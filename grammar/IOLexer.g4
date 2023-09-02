@@ -12,7 +12,6 @@ PLUS : '+' ;
 MINUS : '-' ;
 MULT : '*' ;
 DIV : '/' ;
-MOD : '%' ;
 
 // Parentheses.
 LPAREN : '(' ;

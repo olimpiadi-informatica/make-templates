@@ -24,7 +24,7 @@ double W[N]; // N values in a single line
 /*
  * Notation for M lines, each with 2 integers and a string
  */
-{int from, to; string label;}[M]
+{int from, to; string label;}[M];
 
 // you can leave empty rows with no effect
 
@@ -32,7 +32,7 @@ int matrix[N][M]; // N lines with M integers each
 
 output:
 
-"Case #" test ": "; // something to prepend to each test
+"Case #{}: " // something to prepend to each test
 int L;
 ```
 

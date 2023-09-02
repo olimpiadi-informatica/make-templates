@@ -9,33 +9,28 @@ else:
 
 class IOParserVisitor(ParseTreeVisitor):
 
-    # Visit a parse tree produced by IOParser#filespec.
-    def visitFilespec(self, ctx:IOParser.FilespecContext):
+    # Visit a parse tree produced by IOParser#fileSpec.
+    def visitFileSpec(self, ctx:IOParser.FileSpecContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by IOParser#inputfile.
-    def visitInputfile(self, ctx:IOParser.InputfileContext):
+    # Visit a parse tree produced by IOParser#inputFile.
+    def visitInputFile(self, ctx:IOParser.InputFileContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by IOParser#outputfile.
-    def visitOutputfile(self, ctx:IOParser.OutputfileContext):
+    # Visit a parse tree produced by IOParser#outputFile.
+    def visitOutputFile(self, ctx:IOParser.OutputFileContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by IOParser#inputline.
-    def visitInputline(self, ctx:IOParser.InputlineContext):
+    # Visit a parse tree produced by IOParser#inputLine.
+    def visitInputLine(self, ctx:IOParser.InputLineContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by IOParser#headerline.
-    def visitHeaderline(self, ctx:IOParser.HeaderlineContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by IOParser#outputline.
-    def visitOutputline(self, ctx:IOParser.OutputlineContext):
+    # Visit a parse tree produced by IOParser#outputLine.
+    def visitOutputLine(self, ctx:IOParser.OutputLineContext):
         return self.visitChildren(ctx)
 
 
@@ -64,8 +59,8 @@ class IOParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by IOParser#vartype.
-    def visitVartype(self, ctx:IOParser.VartypeContext):
+    # Visit a parse tree produced by IOParser#varType.
+    def visitVarType(self, ctx:IOParser.VarTypeContext):
         return self.visitChildren(ctx)
 
 

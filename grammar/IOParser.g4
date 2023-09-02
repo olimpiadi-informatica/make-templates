@@ -2,37 +2,35 @@ parser grammar IOParser;
 
 options { tokenVocab=IOLexer; }
 
-filespec : ( REPEAT IDENT UPTO IDENT COLON )? inputfile outputfile ;
+fileSpec : NL* ( REPEAT IDENT UPTO IDENT COLON NL )? NL* inputFile NL+ outputFile NL* EOF ;
 
-inputfile : INPUT COLON inputline ( NL+ inputline )* ;
+inputFile : INPUT COLON NL+ inputLine ( NL+ inputLine )* ;
 
-outputfile: OUTPUT COLON ( headerline NL+ )? outputline ;
+outputFile: OUTPUT COLON NL+ ( STR NL+ )? outputLine ;
 
-inputline
+inputLine
     : values
     | vectors
     | vector
     | matrix
     ;
 
-headerline : ( STR | IDENT )+ SEMICOL ;
-
-outputline
+outputLine
     : values
     | vector
     ;
 
 values : ( homoValues SEMICOL )+ ;
 
-homoValues : vartype IDENT ( COMMA IDENT )* ;
+homoValues : varType IDENT ( COMMA IDENT )* ;
 
 vectors : LBRACE values RBRACE LBRACK arithExpr RBRACK SEMICOL;
 
-vector : vartype LBRACK arithExpr RBRACK IDENT SEMICOL ;
+vector : varType IDENT LBRACK arithExpr RBRACK SEMICOL ;
 
-matrix : vartype LBRACK arithExpr RBRACK LBRACK arithExpr RBRACK IDENT SEMICOL ;
+matrix : varType IDENT LBRACK arithExpr RBRACK LBRACK arithExpr RBRACK SEMICOL ;
 
-vartype : INT | LONG | DOUBLE | CHAR | STRING ;
+varType : INT | LONG | DOUBLE | CHAR | STRING ;
 
 arithExpr
     : addend
@@ -41,7 +39,7 @@ arithExpr
 
 addend
     : term
-    | addend ( MULT | DIV | MOD ) term
+    | addend ( MULT | DIV ) term
     ;
 
 term

@@ -11,62 +11,75 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3 ")
-        buf.write("\u009f\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\37")
+        buf.write("\u00b9\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
-        buf.write("\t\16\4\17\t\17\4\20\t\20\3\2\3\2\3\2\3\2\3\2\5\2&\n\2")
-        buf.write("\3\2\3\2\3\2\3\3\3\3\3\3\3\3\6\3/\n\3\r\3\16\3\60\3\3")
-        buf.write("\7\3\64\n\3\f\3\16\3\67\13\3\3\4\3\4\3\4\3\4\6\4=\n\4")
-        buf.write("\r\4\16\4>\5\4A\n\4\3\4\3\4\3\5\3\5\3\5\3\5\5\5I\n\5\3")
-        buf.write("\6\6\6L\n\6\r\6\16\6M\3\6\3\6\3\7\3\7\5\7T\n\7\3\b\3\b")
-        buf.write("\3\b\6\bY\n\b\r\b\16\bZ\3\t\3\t\3\t\3\t\7\ta\n\t\f\t\16")
-        buf.write("\td\13\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3\13")
-        buf.write("\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3")
-        buf.write("\f\3\f\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\16\7\16\u0087")
-        buf.write("\n\16\f\16\16\16\u008a\13\16\3\17\3\17\3\17\3\17\3\17")
-        buf.write("\3\17\7\17\u0092\n\17\f\17\16\17\u0095\13\17\3\20\3\20")
-        buf.write("\3\20\3\20\3\20\3\20\5\20\u009d\n\20\3\20\2\4\32\34\21")
-        buf.write("\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36\2\6\4\2\36\36")
-        buf.write("  \3\2\3\7\3\2\b\t\3\2\n\f\2\u009f\2%\3\2\2\2\4*\3\2\2")
-        buf.write("\2\68\3\2\2\2\bH\3\2\2\2\nK\3\2\2\2\fS\3\2\2\2\16X\3\2")
-        buf.write("\2\2\20\\\3\2\2\2\22e\3\2\2\2\24m\3\2\2\2\26t\3\2\2\2")
-        buf.write("\30~\3\2\2\2\32\u0080\3\2\2\2\34\u008b\3\2\2\2\36\u009c")
-        buf.write("\3\2\2\2 !\7\27\2\2!\"\7 \2\2\"#\7\30\2\2#$\7 \2\2$&\7")
-        buf.write("\24\2\2% \3\2\2\2%&\3\2\2\2&\'\3\2\2\2\'(\5\4\3\2()\5")
-        buf.write("\6\4\2)\3\3\2\2\2*+\7\31\2\2+,\7\24\2\2,\65\5\b\5\2-/")
-        buf.write("\7\26\2\2.-\3\2\2\2/\60\3\2\2\2\60.\3\2\2\2\60\61\3\2")
-        buf.write("\2\2\61\62\3\2\2\2\62\64\5\b\5\2\63.\3\2\2\2\64\67\3\2")
-        buf.write("\2\2\65\63\3\2\2\2\65\66\3\2\2\2\66\5\3\2\2\2\67\65\3")
-        buf.write("\2\2\289\7\32\2\29@\7\24\2\2:<\5\n\6\2;=\7\26\2\2<;\3")
-        buf.write("\2\2\2=>\3\2\2\2><\3\2\2\2>?\3\2\2\2?A\3\2\2\2@:\3\2\2")
-        buf.write("\2@A\3\2\2\2AB\3\2\2\2BC\5\f\7\2C\7\3\2\2\2DI\5\16\b\2")
-        buf.write("EI\5\22\n\2FI\5\24\13\2GI\5\26\f\2HD\3\2\2\2HE\3\2\2\2")
-        buf.write("HF\3\2\2\2HG\3\2\2\2I\t\3\2\2\2JL\t\2\2\2KJ\3\2\2\2LM")
-        buf.write("\3\2\2\2MK\3\2\2\2MN\3\2\2\2NO\3\2\2\2OP\7\25\2\2P\13")
-        buf.write("\3\2\2\2QT\5\16\b\2RT\5\24\13\2SQ\3\2\2\2SR\3\2\2\2T\r")
-        buf.write("\3\2\2\2UV\5\20\t\2VW\7\25\2\2WY\3\2\2\2XU\3\2\2\2YZ\3")
-        buf.write("\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\17\3\2\2\2\\]\5\30\r\2]b\7")
-        buf.write(" \2\2^_\7\23\2\2_a\7 \2\2`^\3\2\2\2ad\3\2\2\2b`\3\2\2")
-        buf.write("\2bc\3\2\2\2c\21\3\2\2\2db\3\2\2\2ef\7\21\2\2fg\5\16\b")
-        buf.write("\2gh\7\22\2\2hi\7\17\2\2ij\5\32\16\2jk\7\20\2\2kl\7\25")
-        buf.write("\2\2l\23\3\2\2\2mn\5\30\r\2no\7\17\2\2op\5\32\16\2pq\7")
-        buf.write("\20\2\2qr\7 \2\2rs\7\25\2\2s\25\3\2\2\2tu\5\30\r\2uv\7")
-        buf.write("\17\2\2vw\5\32\16\2wx\7\20\2\2xy\7\17\2\2yz\5\32\16\2")
-        buf.write("z{\7\20\2\2{|\7 \2\2|}\7\25\2\2}\27\3\2\2\2~\177\t\3\2")
-        buf.write("\2\177\31\3\2\2\2\u0080\u0081\b\16\1\2\u0081\u0082\5\34")
-        buf.write("\17\2\u0082\u0088\3\2\2\2\u0083\u0084\f\3\2\2\u0084\u0085")
-        buf.write("\t\4\2\2\u0085\u0087\5\34\17\2\u0086\u0083\3\2\2\2\u0087")
-        buf.write("\u008a\3\2\2\2\u0088\u0086\3\2\2\2\u0088\u0089\3\2\2\2")
-        buf.write("\u0089\33\3\2\2\2\u008a\u0088\3\2\2\2\u008b\u008c\b\17")
-        buf.write("\1\2\u008c\u008d\5\36\20\2\u008d\u0093\3\2\2\2\u008e\u008f")
-        buf.write("\f\3\2\2\u008f\u0090\t\5\2\2\u0090\u0092\5\36\20\2\u0091")
-        buf.write("\u008e\3\2\2\2\u0092\u0095\3\2\2\2\u0093\u0091\3\2\2\2")
-        buf.write("\u0093\u0094\3\2\2\2\u0094\35\3\2\2\2\u0095\u0093\3\2")
-        buf.write("\2\2\u0096\u009d\7 \2\2\u0097\u009d\7\37\2\2\u0098\u0099")
-        buf.write("\7\r\2\2\u0099\u009a\5\32\16\2\u009a\u009b\7\16\2\2\u009b")
-        buf.write("\u009d\3\2\2\2\u009c\u0096\3\2\2\2\u009c\u0097\3\2\2\2")
-        buf.write("\u009c\u0098\3\2\2\2\u009d\37\3\2\2\2\17%\60\65>@HMSZ")
-        buf.write("b\u0088\u0093\u009c")
+        buf.write("\t\16\4\17\t\17\3\2\7\2 \n\2\f\2\16\2#\13\2\3\2\3\2\3")
+        buf.write("\2\3\2\3\2\3\2\5\2+\n\2\3\2\7\2.\n\2\f\2\16\2\61\13\2")
+        buf.write("\3\2\3\2\6\2\65\n\2\r\2\16\2\66\3\2\3\2\7\2;\n\2\f\2\16")
+        buf.write("\2>\13\2\3\2\3\2\3\3\3\3\3\3\6\3E\n\3\r\3\16\3F\3\3\3")
+        buf.write("\3\6\3K\n\3\r\3\16\3L\3\3\7\3P\n\3\f\3\16\3S\13\3\3\4")
+        buf.write("\3\4\3\4\6\4X\n\4\r\4\16\4Y\3\4\3\4\6\4^\n\4\r\4\16\4")
+        buf.write("_\5\4b\n\4\3\4\3\4\3\5\3\5\3\5\3\5\5\5j\n\5\3\6\3\6\5")
+        buf.write("\6n\n\6\3\7\3\7\3\7\6\7s\n\7\r\7\16\7t\3\b\3\b\3\b\3\b")
+        buf.write("\7\b{\n\b\f\b\16\b~\13\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3")
+        buf.write("\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13")
+        buf.write("\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\r\3\r\3\r\3\r\3\r")
+        buf.write("\3\r\7\r\u00a1\n\r\f\r\16\r\u00a4\13\r\3\16\3\16\3\16")
+        buf.write("\3\16\3\16\3\16\7\16\u00ac\n\16\f\16\16\16\u00af\13\16")
+        buf.write("\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u00b7\n\17\3\17\2")
+        buf.write("\4\30\32\20\2\4\6\b\n\f\16\20\22\24\26\30\32\34\2\5\3")
+        buf.write("\2\3\7\3\2\b\t\3\2\n\13\2\u00bf\2!\3\2\2\2\4A\3\2\2\2")
+        buf.write("\6T\3\2\2\2\bi\3\2\2\2\nm\3\2\2\2\fr\3\2\2\2\16v\3\2\2")
+        buf.write("\2\20\177\3\2\2\2\22\u0087\3\2\2\2\24\u008e\3\2\2\2\26")
+        buf.write("\u0098\3\2\2\2\30\u009a\3\2\2\2\32\u00a5\3\2\2\2\34\u00b6")
+        buf.write("\3\2\2\2\36 \7\25\2\2\37\36\3\2\2\2 #\3\2\2\2!\37\3\2")
+        buf.write("\2\2!\"\3\2\2\2\"*\3\2\2\2#!\3\2\2\2$%\7\26\2\2%&\7\37")
+        buf.write("\2\2&\'\7\27\2\2\'(\7\37\2\2()\7\23\2\2)+\7\25\2\2*$\3")
+        buf.write("\2\2\2*+\3\2\2\2+/\3\2\2\2,.\7\25\2\2-,\3\2\2\2.\61\3")
+        buf.write("\2\2\2/-\3\2\2\2/\60\3\2\2\2\60\62\3\2\2\2\61/\3\2\2\2")
+        buf.write("\62\64\5\4\3\2\63\65\7\25\2\2\64\63\3\2\2\2\65\66\3\2")
+        buf.write("\2\2\66\64\3\2\2\2\66\67\3\2\2\2\678\3\2\2\28<\5\6\4\2")
+        buf.write("9;\7\25\2\2:9\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=?")
+        buf.write("\3\2\2\2><\3\2\2\2?@\7\2\2\3@\3\3\2\2\2AB\7\30\2\2BD\7")
+        buf.write("\23\2\2CE\7\25\2\2DC\3\2\2\2EF\3\2\2\2FD\3\2\2\2FG\3\2")
+        buf.write("\2\2GH\3\2\2\2HQ\5\b\5\2IK\7\25\2\2JI\3\2\2\2KL\3\2\2")
+        buf.write("\2LJ\3\2\2\2LM\3\2\2\2MN\3\2\2\2NP\5\b\5\2OJ\3\2\2\2P")
+        buf.write("S\3\2\2\2QO\3\2\2\2QR\3\2\2\2R\5\3\2\2\2SQ\3\2\2\2TU\7")
+        buf.write("\31\2\2UW\7\23\2\2VX\7\25\2\2WV\3\2\2\2XY\3\2\2\2YW\3")
+        buf.write("\2\2\2YZ\3\2\2\2Za\3\2\2\2[]\7\35\2\2\\^\7\25\2\2]\\\3")
+        buf.write("\2\2\2^_\3\2\2\2_]\3\2\2\2_`\3\2\2\2`b\3\2\2\2a[\3\2\2")
+        buf.write("\2ab\3\2\2\2bc\3\2\2\2cd\5\n\6\2d\7\3\2\2\2ej\5\f\7\2")
+        buf.write("fj\5\20\t\2gj\5\22\n\2hj\5\24\13\2ie\3\2\2\2if\3\2\2\2")
+        buf.write("ig\3\2\2\2ih\3\2\2\2j\t\3\2\2\2kn\5\f\7\2ln\5\22\n\2m")
+        buf.write("k\3\2\2\2ml\3\2\2\2n\13\3\2\2\2op\5\16\b\2pq\7\24\2\2")
+        buf.write("qs\3\2\2\2ro\3\2\2\2st\3\2\2\2tr\3\2\2\2tu\3\2\2\2u\r")
+        buf.write("\3\2\2\2vw\5\26\f\2w|\7\37\2\2xy\7\22\2\2y{\7\37\2\2z")
+        buf.write("x\3\2\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\17\3\2\2\2~|")
+        buf.write("\3\2\2\2\177\u0080\7\20\2\2\u0080\u0081\5\f\7\2\u0081")
+        buf.write("\u0082\7\21\2\2\u0082\u0083\7\16\2\2\u0083\u0084\5\30")
+        buf.write("\r\2\u0084\u0085\7\17\2\2\u0085\u0086\7\24\2\2\u0086\21")
+        buf.write("\3\2\2\2\u0087\u0088\5\26\f\2\u0088\u0089\7\37\2\2\u0089")
+        buf.write("\u008a\7\16\2\2\u008a\u008b\5\30\r\2\u008b\u008c\7\17")
+        buf.write("\2\2\u008c\u008d\7\24\2\2\u008d\23\3\2\2\2\u008e\u008f")
+        buf.write("\5\26\f\2\u008f\u0090\7\37\2\2\u0090\u0091\7\16\2\2\u0091")
+        buf.write("\u0092\5\30\r\2\u0092\u0093\7\17\2\2\u0093\u0094\7\16")
+        buf.write("\2\2\u0094\u0095\5\30\r\2\u0095\u0096\7\17\2\2\u0096\u0097")
+        buf.write("\7\24\2\2\u0097\25\3\2\2\2\u0098\u0099\t\2\2\2\u0099\27")
+        buf.write("\3\2\2\2\u009a\u009b\b\r\1\2\u009b\u009c\5\32\16\2\u009c")
+        buf.write("\u00a2\3\2\2\2\u009d\u009e\f\3\2\2\u009e\u009f\t\3\2\2")
+        buf.write("\u009f\u00a1\5\32\16\2\u00a0\u009d\3\2\2\2\u00a1\u00a4")
+        buf.write("\3\2\2\2\u00a2\u00a0\3\2\2\2\u00a2\u00a3\3\2\2\2\u00a3")
+        buf.write("\31\3\2\2\2\u00a4\u00a2\3\2\2\2\u00a5\u00a6\b\16\1\2\u00a6")
+        buf.write("\u00a7\5\34\17\2\u00a7\u00ad\3\2\2\2\u00a8\u00a9\f\3\2")
+        buf.write("\2\u00a9\u00aa\t\4\2\2\u00aa\u00ac\5\34\17\2\u00ab\u00a8")
+        buf.write("\3\2\2\2\u00ac\u00af\3\2\2\2\u00ad\u00ab\3\2\2\2\u00ad")
+        buf.write("\u00ae\3\2\2\2\u00ae\33\3\2\2\2\u00af\u00ad\3\2\2\2\u00b0")
+        buf.write("\u00b7\7\37\2\2\u00b1\u00b7\7\36\2\2\u00b2\u00b3\7\f\2")
+        buf.write("\2\u00b3\u00b4\5\30\r\2\u00b4\u00b5\7\r\2\2\u00b5\u00b7")
+        buf.write("\3\2\2\2\u00b6\u00b0\3\2\2\2\u00b6\u00b1\3\2\2\2\u00b6")
+        buf.write("\u00b2\3\2\2\2\u00b7\35\3\2\2\2\24!*/\66<FLQY_aimt|\u00a2")
+        buf.write("\u00ad\u00b6")
         return buf.getvalue()
 
 
@@ -81,36 +94,35 @@ class IOParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'int'", "'long'", "'double'", "'char'", 
-                     "'string'", "'+'", "'-'", "'*'", "'/'", "'%'", "'('", 
-                     "')'", "'['", "']'", "'{'", "'}'", "','", "':'", "';'", 
-                     "'\n'", "'repeat'", "'upto'", "'input'", "'output'" ]
+                     "'string'", "'+'", "'-'", "'*'", "'/'", "'('", "')'", 
+                     "'['", "']'", "'{'", "'}'", "','", "':'", "';'", "'\n'", 
+                     "'repeat'", "'upto'", "'input'", "'output'" ]
 
     symbolicNames = [ "<INVALID>", "INT", "LONG", "DOUBLE", "CHAR", "STRING", 
-                      "PLUS", "MINUS", "MULT", "DIV", "MOD", "LPAREN", "RPAREN", 
+                      "PLUS", "MINUS", "MULT", "DIV", "LPAREN", "RPAREN", 
                       "LBRACK", "RBRACK", "LBRACE", "RBRACE", "COMMA", "COLON", 
                       "SEMICOL", "NL", "REPEAT", "UPTO", "INPUT", "OUTPUT", 
                       "WS", "INLINE_COMMENT", "BLOCK_COMMENT", "STR", "NUM", 
                       "IDENT" ]
 
-    RULE_filespec = 0
-    RULE_inputfile = 1
-    RULE_outputfile = 2
-    RULE_inputline = 3
-    RULE_headerline = 4
-    RULE_outputline = 5
-    RULE_values = 6
-    RULE_homoValues = 7
-    RULE_vectors = 8
-    RULE_vector = 9
-    RULE_matrix = 10
-    RULE_vartype = 11
-    RULE_arithExpr = 12
-    RULE_addend = 13
-    RULE_term = 14
+    RULE_fileSpec = 0
+    RULE_inputFile = 1
+    RULE_outputFile = 2
+    RULE_inputLine = 3
+    RULE_outputLine = 4
+    RULE_values = 5
+    RULE_homoValues = 6
+    RULE_vectors = 7
+    RULE_vector = 8
+    RULE_matrix = 9
+    RULE_varType = 10
+    RULE_arithExpr = 11
+    RULE_addend = 12
+    RULE_term = 13
 
-    ruleNames =  [ "filespec", "inputfile", "outputfile", "inputline", "headerline", 
-                   "outputline", "values", "homoValues", "vectors", "vector", 
-                   "matrix", "vartype", "arithExpr", "addend", "term" ]
+    ruleNames =  [ "fileSpec", "inputFile", "outputFile", "inputLine", "outputLine", 
+                   "values", "homoValues", "vectors", "vector", "matrix", 
+                   "varType", "arithExpr", "addend", "term" ]
 
     EOF = Token.EOF
     INT=1
@@ -122,27 +134,26 @@ class IOParser ( Parser ):
     MINUS=7
     MULT=8
     DIV=9
-    MOD=10
-    LPAREN=11
-    RPAREN=12
-    LBRACK=13
-    RBRACK=14
-    LBRACE=15
-    RBRACE=16
-    COMMA=17
-    COLON=18
-    SEMICOL=19
-    NL=20
-    REPEAT=21
-    UPTO=22
-    INPUT=23
-    OUTPUT=24
-    WS=25
-    INLINE_COMMENT=26
-    BLOCK_COMMENT=27
-    STR=28
-    NUM=29
-    IDENT=30
+    LPAREN=10
+    RPAREN=11
+    LBRACK=12
+    RBRACK=13
+    LBRACE=14
+    RBRACE=15
+    COMMA=16
+    COLON=17
+    SEMICOL=18
+    NL=19
+    REPEAT=20
+    UPTO=21
+    INPUT=22
+    OUTPUT=23
+    WS=24
+    INLINE_COMMENT=25
+    BLOCK_COMMENT=26
+    STR=27
+    NUM=28
+    IDENT=29
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -153,20 +164,29 @@ class IOParser ( Parser ):
 
 
 
-    class FilespecContext(ParserRuleContext):
+    class FileSpecContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def inputfile(self):
-            return self.getTypedRuleContext(IOParser.InputfileContext,0)
+        def inputFile(self):
+            return self.getTypedRuleContext(IOParser.InputFileContext,0)
 
 
-        def outputfile(self):
-            return self.getTypedRuleContext(IOParser.OutputfileContext,0)
+        def outputFile(self):
+            return self.getTypedRuleContext(IOParser.OutputFileContext,0)
 
+
+        def EOF(self):
+            return self.getToken(IOParser.EOF, 0)
+
+        def NL(self, i:int=None):
+            if i is None:
+                return self.getTokens(IOParser.NL)
+            else:
+                return self.getToken(IOParser.NL, i)
 
         def REPEAT(self):
             return self.getToken(IOParser.REPEAT, 0)
@@ -184,44 +204,91 @@ class IOParser ( Parser ):
             return self.getToken(IOParser.COLON, 0)
 
         def getRuleIndex(self):
-            return IOParser.RULE_filespec
+            return IOParser.RULE_fileSpec
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFilespec" ):
-                return visitor.visitFilespec(self)
+            if hasattr( visitor, "visitFileSpec" ):
+                return visitor.visitFileSpec(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def filespec(self):
+    def fileSpec(self):
 
-        localctx = IOParser.FilespecContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 0, self.RULE_filespec)
+        localctx = IOParser.FileSpecContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 0, self.RULE_fileSpec)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 35
+            self.state = 31
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,0,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    self.state = 28
+                    self.match(IOParser.NL) 
+                self.state = 33
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,0,self._ctx)
+
+            self.state = 40
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==IOParser.REPEAT:
-                self.state = 30
-                self.match(IOParser.REPEAT)
-                self.state = 31
-                self.match(IOParser.IDENT)
-                self.state = 32
-                self.match(IOParser.UPTO)
-                self.state = 33
-                self.match(IOParser.IDENT)
                 self.state = 34
+                self.match(IOParser.REPEAT)
+                self.state = 35
+                self.match(IOParser.IDENT)
+                self.state = 36
+                self.match(IOParser.UPTO)
+                self.state = 37
+                self.match(IOParser.IDENT)
+                self.state = 38
                 self.match(IOParser.COLON)
+                self.state = 39
+                self.match(IOParser.NL)
 
 
-            self.state = 37
-            self.inputfile()
-            self.state = 38
-            self.outputfile()
+            self.state = 45
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==IOParser.NL:
+                self.state = 42
+                self.match(IOParser.NL)
+                self.state = 47
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 48
+            self.inputFile()
+            self.state = 50 
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while True:
+                self.state = 49
+                self.match(IOParser.NL)
+                self.state = 52 
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if not (_la==IOParser.NL):
+                    break
+
+            self.state = 54
+            self.outputFile()
+            self.state = 58
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while _la==IOParser.NL:
+                self.state = 55
+                self.match(IOParser.NL)
+                self.state = 60
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+
+            self.state = 61
+            self.match(IOParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -231,7 +298,7 @@ class IOParser ( Parser ):
         return localctx
 
 
-    class InputfileContext(ParserRuleContext):
+    class InputFileContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -244,11 +311,11 @@ class IOParser ( Parser ):
         def COLON(self):
             return self.getToken(IOParser.COLON, 0)
 
-        def inputline(self, i:int=None):
+        def inputLine(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(IOParser.InputlineContext)
+                return self.getTypedRuleContexts(IOParser.InputLineContext)
             else:
-                return self.getTypedRuleContext(IOParser.InputlineContext,i)
+                return self.getTypedRuleContext(IOParser.InputLineContext,i)
 
 
         def NL(self, i:int=None):
@@ -258,51 +325,64 @@ class IOParser ( Parser ):
                 return self.getToken(IOParser.NL, i)
 
         def getRuleIndex(self):
-            return IOParser.RULE_inputfile
+            return IOParser.RULE_inputFile
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInputfile" ):
-                return visitor.visitInputfile(self)
+            if hasattr( visitor, "visitInputFile" ):
+                return visitor.visitInputFile(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def inputfile(self):
+    def inputFile(self):
 
-        localctx = IOParser.InputfileContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 2, self.RULE_inputfile)
+        localctx = IOParser.InputFileContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 2, self.RULE_inputFile)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 40
+            self.state = 63
             self.match(IOParser.INPUT)
-            self.state = 41
+            self.state = 64
             self.match(IOParser.COLON)
-            self.state = 42
-            self.inputline()
-            self.state = 51
+            self.state = 66 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==IOParser.NL:
-                self.state = 44 
+            while True:
+                self.state = 65
+                self.match(IOParser.NL)
+                self.state = 68 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while True:
-                    self.state = 43
-                    self.match(IOParser.NL)
-                    self.state = 46 
+                if not (_la==IOParser.NL):
+                    break
+
+            self.state = 70
+            self.inputLine()
+            self.state = 79
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,7,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    self.state = 72 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if not (_la==IOParser.NL):
-                        break
+                    while True:
+                        self.state = 71
+                        self.match(IOParser.NL)
+                        self.state = 74 
+                        self._errHandler.sync(self)
+                        _la = self._input.LA(1)
+                        if not (_la==IOParser.NL):
+                            break
 
-                self.state = 48
-                self.inputline()
-                self.state = 53
+                    self.state = 76
+                    self.inputLine() 
+                self.state = 81
                 self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                _alt = self._interp.adaptivePredict(self._input,7,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -313,7 +393,7 @@ class IOParser ( Parser ):
         return localctx
 
 
-    class OutputfileContext(ParserRuleContext):
+    class OutputFileContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -326,12 +406,8 @@ class IOParser ( Parser ):
         def COLON(self):
             return self.getToken(IOParser.COLON, 0)
 
-        def outputline(self):
-            return self.getTypedRuleContext(IOParser.OutputlineContext,0)
-
-
-        def headerline(self):
-            return self.getTypedRuleContext(IOParser.HeaderlineContext,0)
+        def outputLine(self):
+            return self.getTypedRuleContext(IOParser.OutputLineContext,0)
 
 
         def NL(self, i:int=None):
@@ -340,42 +416,57 @@ class IOParser ( Parser ):
             else:
                 return self.getToken(IOParser.NL, i)
 
+        def STR(self):
+            return self.getToken(IOParser.STR, 0)
+
         def getRuleIndex(self):
-            return IOParser.RULE_outputfile
+            return IOParser.RULE_outputFile
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitOutputfile" ):
-                return visitor.visitOutputfile(self)
+            if hasattr( visitor, "visitOutputFile" ):
+                return visitor.visitOutputFile(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def outputfile(self):
+    def outputFile(self):
 
-        localctx = IOParser.OutputfileContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_outputfile)
+        localctx = IOParser.OutputFileContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 4, self.RULE_outputFile)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 54
+            self.state = 82
             self.match(IOParser.OUTPUT)
-            self.state = 55
+            self.state = 83
             self.match(IOParser.COLON)
-            self.state = 62
+            self.state = 85 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==IOParser.STR or _la==IOParser.IDENT:
-                self.state = 56
-                self.headerline()
-                self.state = 58 
+            while True:
+                self.state = 84
+                self.match(IOParser.NL)
+                self.state = 87 
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if not (_la==IOParser.NL):
+                    break
+
+            self.state = 95
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==IOParser.STR:
+                self.state = 89
+                self.match(IOParser.STR)
+                self.state = 91 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while True:
-                    self.state = 57
+                    self.state = 90
                     self.match(IOParser.NL)
-                    self.state = 60 
+                    self.state = 93 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if not (_la==IOParser.NL):
@@ -383,8 +474,8 @@ class IOParser ( Parser ):
 
 
 
-            self.state = 64
-            self.outputline()
+            self.state = 97
+            self.outputLine()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -394,7 +485,7 @@ class IOParser ( Parser ):
         return localctx
 
 
-    class InputlineContext(ParserRuleContext):
+    class InputLineContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -418,46 +509,46 @@ class IOParser ( Parser ):
 
 
         def getRuleIndex(self):
-            return IOParser.RULE_inputline
+            return IOParser.RULE_inputLine
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInputline" ):
-                return visitor.visitInputline(self)
+            if hasattr( visitor, "visitInputLine" ):
+                return visitor.visitInputLine(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def inputline(self):
+    def inputLine(self):
 
-        localctx = IOParser.InputlineContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 6, self.RULE_inputline)
+        localctx = IOParser.InputLineContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 6, self.RULE_inputLine)
         try:
-            self.state = 70
+            self.state = 103
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 66
+                self.state = 99
                 self.values()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 67
+                self.state = 100
                 self.vectors()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 68
+                self.state = 101
                 self.vector()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 69
+                self.state = 102
                 self.matrix()
                 pass
 
@@ -471,76 +562,7 @@ class IOParser ( Parser ):
         return localctx
 
 
-    class HeaderlineContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def SEMICOL(self):
-            return self.getToken(IOParser.SEMICOL, 0)
-
-        def STR(self, i:int=None):
-            if i is None:
-                return self.getTokens(IOParser.STR)
-            else:
-                return self.getToken(IOParser.STR, i)
-
-        def IDENT(self, i:int=None):
-            if i is None:
-                return self.getTokens(IOParser.IDENT)
-            else:
-                return self.getToken(IOParser.IDENT, i)
-
-        def getRuleIndex(self):
-            return IOParser.RULE_headerline
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitHeaderline" ):
-                return visitor.visitHeaderline(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def headerline(self):
-
-        localctx = IOParser.HeaderlineContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_headerline)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 73 
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while True:
-                self.state = 72
-                _la = self._input.LA(1)
-                if not(_la==IOParser.STR or _la==IOParser.IDENT):
-                    self._errHandler.recoverInline(self)
-                else:
-                    self._errHandler.reportMatch(self)
-                    self.consume()
-                self.state = 75 
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if not (_la==IOParser.STR or _la==IOParser.IDENT):
-                    break
-
-            self.state = 77
-            self.match(IOParser.SEMICOL)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class OutputlineContext(ParserRuleContext):
+    class OutputLineContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -556,34 +578,34 @@ class IOParser ( Parser ):
 
 
         def getRuleIndex(self):
-            return IOParser.RULE_outputline
+            return IOParser.RULE_outputLine
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitOutputline" ):
-                return visitor.visitOutputline(self)
+            if hasattr( visitor, "visitOutputLine" ):
+                return visitor.visitOutputLine(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def outputline(self):
+    def outputLine(self):
 
-        localctx = IOParser.OutputlineContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_outputline)
+        localctx = IOParser.OutputLineContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 8, self.RULE_outputLine)
         try:
-            self.state = 81
+            self.state = 107
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 79
+                self.state = 105
                 self.values()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 80
+                self.state = 106
                 self.vector()
                 pass
 
@@ -632,19 +654,19 @@ class IOParser ( Parser ):
     def values(self):
 
         localctx = IOParser.ValuesContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_values)
+        self.enterRule(localctx, 10, self.RULE_values)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 86 
+            self.state = 112 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 83
+                self.state = 109
                 self.homoValues()
-                self.state = 84
+                self.state = 110
                 self.match(IOParser.SEMICOL)
-                self.state = 88 
+                self.state = 114 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IOParser.INT) | (1 << IOParser.LONG) | (1 << IOParser.DOUBLE) | (1 << IOParser.CHAR) | (1 << IOParser.STRING))) != 0)):
@@ -666,8 +688,8 @@ class IOParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def vartype(self):
-            return self.getTypedRuleContext(IOParser.VartypeContext,0)
+        def varType(self):
+            return self.getTypedRuleContext(IOParser.VarTypeContext,0)
 
 
         def IDENT(self, i:int=None):
@@ -697,23 +719,23 @@ class IOParser ( Parser ):
     def homoValues(self):
 
         localctx = IOParser.HomoValuesContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_homoValues)
+        self.enterRule(localctx, 12, self.RULE_homoValues)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 90
-            self.vartype()
-            self.state = 91
+            self.state = 116
+            self.varType()
+            self.state = 117
             self.match(IOParser.IDENT)
-            self.state = 96
+            self.state = 122
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==IOParser.COMMA:
-                self.state = 92
+                self.state = 118
                 self.match(IOParser.COMMA)
-                self.state = 93
+                self.state = 119
                 self.match(IOParser.IDENT)
-                self.state = 98
+                self.state = 124
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -771,22 +793,22 @@ class IOParser ( Parser ):
     def vectors(self):
 
         localctx = IOParser.VectorsContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_vectors)
+        self.enterRule(localctx, 14, self.RULE_vectors)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 99
+            self.state = 125
             self.match(IOParser.LBRACE)
-            self.state = 100
+            self.state = 126
             self.values()
-            self.state = 101
+            self.state = 127
             self.match(IOParser.RBRACE)
-            self.state = 102
+            self.state = 128
             self.match(IOParser.LBRACK)
-            self.state = 103
+            self.state = 129
             self.arithExpr(0)
-            self.state = 104
+            self.state = 130
             self.match(IOParser.RBRACK)
-            self.state = 105
+            self.state = 131
             self.match(IOParser.SEMICOL)
         except RecognitionException as re:
             localctx.exception = re
@@ -804,9 +826,12 @@ class IOParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def vartype(self):
-            return self.getTypedRuleContext(IOParser.VartypeContext,0)
+        def varType(self):
+            return self.getTypedRuleContext(IOParser.VarTypeContext,0)
 
+
+        def IDENT(self):
+            return self.getToken(IOParser.IDENT, 0)
 
         def LBRACK(self):
             return self.getToken(IOParser.LBRACK, 0)
@@ -817,9 +842,6 @@ class IOParser ( Parser ):
 
         def RBRACK(self):
             return self.getToken(IOParser.RBRACK, 0)
-
-        def IDENT(self):
-            return self.getToken(IOParser.IDENT, 0)
 
         def SEMICOL(self):
             return self.getToken(IOParser.SEMICOL, 0)
@@ -839,20 +861,20 @@ class IOParser ( Parser ):
     def vector(self):
 
         localctx = IOParser.VectorContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_vector)
+        self.enterRule(localctx, 16, self.RULE_vector)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 107
-            self.vartype()
-            self.state = 108
-            self.match(IOParser.LBRACK)
-            self.state = 109
-            self.arithExpr(0)
-            self.state = 110
-            self.match(IOParser.RBRACK)
-            self.state = 111
+            self.state = 133
+            self.varType()
+            self.state = 134
             self.match(IOParser.IDENT)
-            self.state = 112
+            self.state = 135
+            self.match(IOParser.LBRACK)
+            self.state = 136
+            self.arithExpr(0)
+            self.state = 137
+            self.match(IOParser.RBRACK)
+            self.state = 138
             self.match(IOParser.SEMICOL)
         except RecognitionException as re:
             localctx.exception = re
@@ -870,9 +892,12 @@ class IOParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def vartype(self):
-            return self.getTypedRuleContext(IOParser.VartypeContext,0)
+        def varType(self):
+            return self.getTypedRuleContext(IOParser.VarTypeContext,0)
 
+
+        def IDENT(self):
+            return self.getToken(IOParser.IDENT, 0)
 
         def LBRACK(self, i:int=None):
             if i is None:
@@ -893,9 +918,6 @@ class IOParser ( Parser ):
             else:
                 return self.getToken(IOParser.RBRACK, i)
 
-        def IDENT(self):
-            return self.getToken(IOParser.IDENT, 0)
-
         def SEMICOL(self):
             return self.getToken(IOParser.SEMICOL, 0)
 
@@ -914,26 +936,26 @@ class IOParser ( Parser ):
     def matrix(self):
 
         localctx = IOParser.MatrixContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_matrix)
+        self.enterRule(localctx, 18, self.RULE_matrix)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 114
-            self.vartype()
-            self.state = 115
-            self.match(IOParser.LBRACK)
-            self.state = 116
-            self.arithExpr(0)
-            self.state = 117
-            self.match(IOParser.RBRACK)
-            self.state = 118
-            self.match(IOParser.LBRACK)
-            self.state = 119
-            self.arithExpr(0)
-            self.state = 120
-            self.match(IOParser.RBRACK)
-            self.state = 121
+            self.state = 140
+            self.varType()
+            self.state = 141
             self.match(IOParser.IDENT)
-            self.state = 122
+            self.state = 142
+            self.match(IOParser.LBRACK)
+            self.state = 143
+            self.arithExpr(0)
+            self.state = 144
+            self.match(IOParser.RBRACK)
+            self.state = 145
+            self.match(IOParser.LBRACK)
+            self.state = 146
+            self.arithExpr(0)
+            self.state = 147
+            self.match(IOParser.RBRACK)
+            self.state = 148
             self.match(IOParser.SEMICOL)
         except RecognitionException as re:
             localctx.exception = re
@@ -944,7 +966,7 @@ class IOParser ( Parser ):
         return localctx
 
 
-    class VartypeContext(ParserRuleContext):
+    class VarTypeContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -967,25 +989,25 @@ class IOParser ( Parser ):
             return self.getToken(IOParser.STRING, 0)
 
         def getRuleIndex(self):
-            return IOParser.RULE_vartype
+            return IOParser.RULE_varType
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitVartype" ):
-                return visitor.visitVartype(self)
+            if hasattr( visitor, "visitVarType" ):
+                return visitor.visitVarType(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def vartype(self):
+    def varType(self):
 
-        localctx = IOParser.VartypeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_vartype)
+        localctx = IOParser.VarTypeContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 20, self.RULE_varType)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 124
+            self.state = 150
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IOParser.INT) | (1 << IOParser.LONG) | (1 << IOParser.DOUBLE) | (1 << IOParser.CHAR) | (1 << IOParser.STRING))) != 0)):
                 self._errHandler.recoverInline(self)
@@ -1038,17 +1060,17 @@ class IOParser ( Parser ):
         _parentState = self.state
         localctx = IOParser.ArithExprContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 24
-        self.enterRecursionRule(localctx, 24, self.RULE_arithExpr, _p)
+        _startState = 22
+        self.enterRecursionRule(localctx, 22, self.RULE_arithExpr, _p)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 127
+            self.state = 153
             self.addend(0)
             self._ctx.stop = self._input.LT(-1)
-            self.state = 134
+            self.state = 160
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,10,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -1056,22 +1078,22 @@ class IOParser ( Parser ):
                     _prevctx = localctx
                     localctx = IOParser.ArithExprContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_arithExpr)
-                    self.state = 129
+                    self.state = 155
                     if not self.precpred(self._ctx, 1):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 130
+                    self.state = 156
                     _la = self._input.LA(1)
                     if not(_la==IOParser.PLUS or _la==IOParser.MINUS):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
                         self.consume()
-                    self.state = 131
+                    self.state = 157
                     self.addend(0) 
-                self.state = 136
+                self.state = 162
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,10,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1103,9 +1125,6 @@ class IOParser ( Parser ):
         def DIV(self):
             return self.getToken(IOParser.DIV, 0)
 
-        def MOD(self):
-            return self.getToken(IOParser.MOD, 0)
-
         def getRuleIndex(self):
             return IOParser.RULE_addend
 
@@ -1122,17 +1141,17 @@ class IOParser ( Parser ):
         _parentState = self.state
         localctx = IOParser.AddendContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 26
-        self.enterRecursionRule(localctx, 26, self.RULE_addend, _p)
+        _startState = 24
+        self.enterRecursionRule(localctx, 24, self.RULE_addend, _p)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 138
+            self.state = 164
             self.term()
             self._ctx.stop = self._input.LT(-1)
-            self.state = 145
+            self.state = 171
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,11,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
@@ -1140,22 +1159,22 @@ class IOParser ( Parser ):
                     _prevctx = localctx
                     localctx = IOParser.AddendContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_addend)
-                    self.state = 140
+                    self.state = 166
                     if not self.precpred(self._ctx, 1):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 141
+                    self.state = 167
                     _la = self._input.LA(1)
-                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << IOParser.MULT) | (1 << IOParser.DIV) | (1 << IOParser.MOD))) != 0)):
+                    if not(_la==IOParser.MULT or _la==IOParser.DIV):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
                         self.consume()
-                    self.state = 142
+                    self.state = 168
                     self.term() 
-                self.state = 147
+                self.state = 173
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,11,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1204,28 +1223,28 @@ class IOParser ( Parser ):
     def term(self):
 
         localctx = IOParser.TermContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_term)
+        self.enterRule(localctx, 26, self.RULE_term)
         try:
-            self.state = 154
+            self.state = 180
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [IOParser.IDENT]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 148
+                self.state = 174
                 self.match(IOParser.IDENT)
                 pass
             elif token in [IOParser.NUM]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 149
+                self.state = 175
                 self.match(IOParser.NUM)
                 pass
             elif token in [IOParser.LPAREN]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 150
+                self.state = 176
                 self.match(IOParser.LPAREN)
-                self.state = 151
+                self.state = 177
                 self.arithExpr(0)
-                self.state = 152
+                self.state = 178
                 self.match(IOParser.RPAREN)
                 pass
             else:
@@ -1244,8 +1263,8 @@ class IOParser ( Parser ):
     def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
         if self._predicates == None:
             self._predicates = dict()
-        self._predicates[12] = self.arithExpr_sempred
-        self._predicates[13] = self.addend_sempred
+        self._predicates[11] = self.arithExpr_sempred
+        self._predicates[12] = self.addend_sempred
         pred = self._predicates.get(ruleIndex, None)
         if pred is None:
             raise Exception("No predicate with index:" + str(ruleIndex))
