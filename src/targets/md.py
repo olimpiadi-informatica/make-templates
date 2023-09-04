@@ -26,7 +26,7 @@ Il file di input è composto come segue:
 
 ## Formato di output
 
-Il file di output deve contenere una riga con %s"""
+Il file di output deve contenere una riga composta da%s"""
 
 locale = {
     'en' : [],
@@ -147,12 +147,17 @@ def generate(name:str, prog:Block, lang:str, bounds:dict):
         rep = prog.code[-1]
         fmt = rep.code.code[-2].format[1:-1]
         T = rep.bound
-        p = Block()
-        p.code = rep.code.code[1:-2]
-        out = build_block(Block(rep.code.code[-1]))[22:]
-        if out[:2] == "il":
-            out = out[1:]
-        elif out[0] == "l":
-            out = "l" + out
-        return reptempl % (T, T, T, build_block(p), fmt.replace("{}", rep.idx), rep.idx, out)
-    return template % ("in\n", "out")
+        out = rep.code.code[-1]
+        prog.code = rep.code.code[1:-2]
+        t = reptempl % (T, T, T, "%s", fmt.replace("{}", rep.idx), rep.idx, "%s")
+    else:
+        out = prog.code[-1]
+        prog.code = prog.code[:-1]
+        t = template
+    prog = build_block(prog)
+    out = build_block(Block(out))[22:]
+    if out[:2] == "il":
+        out = out[1:]
+    elif out[0] == "l":
+        out = "l" + out
+    return t % (prog, out)
