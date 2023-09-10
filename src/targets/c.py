@@ -67,7 +67,8 @@ def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
     s = "printf(\"%s%s\", %s);\n" if out else "assert(" + str(len(refs)) + " == scanf(\"%s%s\", &%s));\n"
     sep = ", " if out else ", &"
     e = "\\n" if out and end else ""
-    return s % ("".join(type_formats[t] if t in type_formats else t for t in types), e, sep.join(build_reference(r) for r in refs))
+    fs = " " if out else ""
+    return s % (fs.join(type_formats[t] if t in type_formats else t for t in types), e, sep.join(build_reference(r) for r in refs))
 
 def build_consts(consts:set, bounds:dict):
     if len(consts) == 0:
