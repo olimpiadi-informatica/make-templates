@@ -119,7 +119,7 @@ def build_block(prog:Block, lang:str):
             if 'int' not in vs:
                 vs['int'] = set()
             vs['int'].add('i')
-            s += build_for('i', 0, c.type.dims[0].value, indent(build_inout(c.out, [c.type.base], [c.var.addIndex('i')], False)))
+            s += build_for('i', 0, c.type.dims[-1].value, indent(build_inout(c.out, [c.type.base], [c.var.addIndex('i')], False)))
             s += build_inout(c.out, [], [], True)
         elif isinstance(c, InOutLine):
             s += build_inout(c.out, c.types, c.items, True)

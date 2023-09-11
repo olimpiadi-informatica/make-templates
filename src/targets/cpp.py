@@ -78,9 +78,9 @@ def build_block(prog:Block, lang:str):
         if isinstance(c, VarDeclaration):
             s += build_declaration(c)
         elif isinstance(c, Repeat):
-            s += build_for(c.idx, c.start,  c.bound, indent(build_block(c.code, lang)))
+            s += build_for(c.idx, c.start, c.bound, indent(build_block(c.code, lang)))
         elif isinstance(c, InOutSequence):
-            s += build_for('i', 0, c.type.dims[0].value, indent(build_inout(c.out, [c.var.addIndex('i')], False, False)))
+            s += build_for('i', 0, c.type.dims[-1].value, indent(build_inout(c.out, [c.var.addIndex('i')], False, False)))
             s += build_inout(c.out, [], True, False)
         elif isinstance(c, InOutLine):
             s += build_inout(c.out, c.items, True, False)

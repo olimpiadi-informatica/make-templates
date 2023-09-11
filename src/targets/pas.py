@@ -101,7 +101,7 @@ def build_block(prog:Block, lang:str):
             if 'LongInt' not in vs:
                 vs['LongInt'] = set()
             vs['LongInt'].add('i')
-            s += build_for('i', 0, c.type.dims[0].value, indent(build_inout(c.out, [c.var.addIndex('i')], False)))
+            s += build_for('i', 0, c.type.dims[-1].value, indent(build_inout(c.out, [c.var.addIndex('i')], False)))
             s += build_inout(c.out, [], True)
         elif isinstance(c, InOutLine):
             s += build_inout(c.out, c.items, True)

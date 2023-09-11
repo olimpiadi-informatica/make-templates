@@ -107,7 +107,7 @@ def build_block(prog:Block, lang:str):
         elif isinstance(c, Repeat):
             s += build_for(c.idx, c.start,  c.bound, indent(build_block(c.code, lang)))
         elif isinstance(c, InOutSequence):
-            s += build_for('i', 0, c.type.dims[0].value, indent(build_inout(c.out, [c.type.base], [c.var.addIndex('i')], False)))
+            s += build_for('i', 0, c.type.dims[-1].value, indent(build_inout(c.out, [c.type.base], [c.var.addIndex('i')], False)))
             s += build_inout(c.out, [], [], True)
         elif isinstance(c, InOutLine):
             s += build_inout(c.out, c.types, c.items, True)
