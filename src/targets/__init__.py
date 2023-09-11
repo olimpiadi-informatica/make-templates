@@ -3,3 +3,4 @@ from . import cpp
 from . import java
 from . import md
 from . import pas
+from . import py
