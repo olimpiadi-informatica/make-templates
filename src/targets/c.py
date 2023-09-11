@@ -62,13 +62,14 @@ def build_for(v:str, k:int, b:str, c:str):
     return ("for (%s = %d; %s %s %s; ++%s)" + (" {\n%s}\n" if c.count('\n') > 1 else "\n%s")) % (v, k, v, "<" if k == 0 else "<=", b, v, c)
 
 def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
-    if len(refs) == 0:
+    if len(refs) == 0 and not (out and end):
         return ""
-    s = "printf(\"%s%s\", %s);\n" if out else "assert(" + str(len(refs)) + " == scanf(\"%s%s\", &%s));\n"
+    s = "printf(%s);\n" if out else "assert(" + str(len(refs)) + " == scanf(%s));\n"
     sep = ", " if out else ", &"
-    e = "\\n" if out and end else ""
+    e = "\\n" if out and end else " " if out and types[0] in type_formats else ""
     fs = " " if out else ""
-    return s % (fs.join(type_formats[t] if t in type_formats else t for t in types), e, sep.join(build_reference(r) for r in refs))
+    fmt = '"%s%s"' % (fs.join(type_formats[t] if t in type_formats else t for t in types), e)
+    return s % sep.join([fmt] + [build_reference(r) for r in refs])
 
 def build_consts(consts:set, bounds:dict):
     if len(consts) == 0:
@@ -119,6 +120,7 @@ def build_block(prog:Block, lang:str):
                 vs['int'] = set()
             vs['int'].add('i')
             s += build_for('i', 0, c.type.dims[0].value, indent(build_inout(c.out, [c.type.base], [c.var.addIndex('i')], False)))
+            s += build_inout(c.out, [], [], True)
         elif isinstance(c, InOutLine):
             s += build_inout(c.out, c.types, c.items, True)
         elif isinstance(c, FormatLine):

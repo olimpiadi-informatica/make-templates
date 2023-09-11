@@ -76,10 +76,11 @@ def build_for(v:str, k:int, b:str, c:str):
     return ("for (int %s = %d; %s %s %s; ++%s)" + (" {\n%s}\n" if c.count('\n') > 1 else "\n%s")) % (v, k, v, "<" if k == 0 else "<=", b, v, c)
 
 def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
-    if len(refs) == 0:
+    if len(refs) == 0 and not (out and end):
         return ""
     if out:
-        return "prnt.format(\"%s%s\", %s);\n" % (" ".join(type_formats[t] if t in type_formats else t for t in types), "\\n" if end else "", ", ".join(build_reference(r) for r in refs))
+        fmt = '"%s%s"' % (" ".join(type_formats[t] if t in type_formats else t for t in types), "\\n" if end else " " if types[0] in type_formats else "")
+        return "prnt.format(%s);\n" % ", ".join([fmt] + [build_reference(r) for r in refs])
     s = ""
     for i in range(len(types)):
         t = types[i]
@@ -107,6 +108,7 @@ def build_block(prog:Block, lang:str):
             s += build_for(c.idx, c.start,  c.bound, indent(build_block(c.code, lang)))
         elif isinstance(c, InOutSequence):
             s += build_for('i', 0, c.type.dims[0].value, indent(build_inout(c.out, [c.type.base], [c.var.addIndex('i')], False)))
+            s += build_inout(c.out, [], [], True)
         elif isinstance(c, InOutLine):
             s += build_inout(c.out, c.types, c.items, True)
         elif isinstance(c, FormatLine):

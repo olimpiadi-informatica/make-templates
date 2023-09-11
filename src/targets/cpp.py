@@ -60,13 +60,17 @@ def build_declaration(d:VarDeclaration):
 def build_for(v:str, k:int, b:str, c:str):
     return ("for (int %s = %d; %s %s %s; ++%s)" + (" {\n%s}\n" if c.count('\n') > 1 else "\n%s")) % (v, k, v, "<" if k == 0 else "<=", b, v, c)
 
-def build_inout(out:bool, refs:List[VarReference], end:bool):
-    if len(refs) == 0:
+def build_inout(out:bool, refs:List[VarReference], end:bool, fmt:bool):
+    if len(refs) == 0 and not (out and end):
         return ""
-    s = "cout << " if out else "cin >> "
+    s = "cout" if out else "cin"
     sep = " << " if out else " >> "
-    e = " << endl;\n" if out and end else ";\n"
-    return s + sep.join(build_reference(r) for r in refs) + e
+    ms = sep + '" "' + sep if out and not fmt else sep
+    if len(refs) > 0:
+        s += sep + ms.join(build_reference(r) for r in refs)
+    if out and not fmt:
+        s += sep + ("endl" if end else '" "')
+    return s + ";\n"
 
 def build_block(prog:Block, lang:str):
     s = ""
@@ -76,12 +80,13 @@ def build_block(prog:Block, lang:str):
         elif isinstance(c, Repeat):
             s += build_for(c.idx, c.start,  c.bound, indent(build_block(c.code, lang)))
         elif isinstance(c, InOutSequence):
-            s += build_for('i', 0, c.type.dims[0].value, indent(build_inout(c.out, [c.var.addIndex('i')], False)))
+            s += build_for('i', 0, c.type.dims[0].value, indent(build_inout(c.out, [c.var.addIndex('i')], False, False)))
+            s += build_inout(c.out, [], True, False)
         elif isinstance(c, InOutLine):
-            s += build_inout(c.out, c.items, True)
+            s += build_inout(c.out, c.items, True, False)
         elif isinstance(c, FormatLine):
             format = c.format[1:-1].split('{}')
-            s += build_inout(True, ['"%s"'%format[0], c.var, '"%s"'%format[1]], False)
+            s += build_inout(True, ['"%s"'%format[0], c.var, '"%s"'%format[1]], False, True)
         elif isinstance(c, UserCode):
             s += "// %s\n" % locale[lang][2]
         elif isinstance(c, Instruction):
