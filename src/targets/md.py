@@ -2,7 +2,9 @@ import sys
 sys.path.append('..')
 from tree import *
 
-reptempl = """
+templates = {"it" : {}, "en" : {}}
+
+templates['it']['rep'] = """
 ## Formato di input
 
 La prima riga del file di input contiene un intero $%s$, il numero di casi di test. Seguono $%s$ casi di test, numerati da $1$ a $%s$. Ogni caso di test è preceduto da una riga vuota.
@@ -13,11 +15,9 @@ Ogni caso di test è composto come segue:
 
 ## Formato di output
 
-Il file di output deve contenere la risposta ai casi di test che sei riuscito a risolvere.
-Per ogni caso di test che hai risolto, il file di output deve contenere una riga con la dicitura "`%s`",
-dove `%s` è il numero del caso di test (a partire da $1$), seguita da%s"""
+Il file di output deve contenere la risposta ai casi di test che sei riuscito a risolvere. Per ogni caso di test che hai risolto, il file di output deve contenere una riga con la dicitura "`%s`", dove `%s` è il numero del caso di test (a partire da $1$), seguita da%s"""
 
-template = """
+templates['it']['std'] = """
 ## Formato di input
 
 Il file di input è composto come segue:
@@ -27,6 +27,30 @@ Il file di input è composto come segue:
 ## Formato di output
 
 Il file di output deve contenere una riga composta da%s"""
+
+templates['en']['rep'] = """
+## Input Format
+
+The first line of the input file contains a single integer $%s$, the number of test cases. $%s$ test cases follow, numbered from $1$ to $%s$, each preceded by an empty line.
+
+Each test case consists of:
+
+%s
+
+## Output Format
+
+The output file must contain the answer to the test cases you were able to solve. For each test case you solved, the output file must contain a line with "`%s`", where `%s` is the number of the test case (starting from $1$), followed by %s"""
+
+templates['en']['std'] = """
+## Input Format
+
+The input file consists of:
+
+%s
+
+## Output Format
+
+The output file must contain a single line consisting of %s"""
 
 locale = {
     'en' : [],
@@ -50,7 +74,17 @@ typegender = {
     'string' : (1, 'la stringa', 'stringhe')
 }
 
-def type_name(t:str, i:int):
+engtypes = {
+    'int' : 'integer',
+    'long' : '64-bit integer',
+    'double' : 'floating-point number',
+    'char' : 'character',
+    'string' : 'string'
+}
+
+def type_name(t:str, i:int, lang:str):
+    if lang == 'en':
+        return engtypes[t] + ('s' if i > 1 else '')
     if i == 1:
         return typegender[t][1]
     return itanum[typegender[t][0]][i] + ' ' + typegender[t][2]
@@ -90,24 +124,27 @@ def build_declaration(d:VarDeclaration):
 def build_for(v:str, k:int, b:str, c:str):
     return ("for (int %s = %d; %s %s %s; ++%s)" + (" {\n%s}\n" if c.count('\n') > 1 else "\n%s")) % (v, k, v, "<" if k == 0 else "<=", b, v, c)
 
-def build_inout(types:List[str], refs:List[VarReference]):
+def build_inout(types:List[str], refs:List[VarReference], lang:str):
     s = ""
     l = []
     for i in range(len(refs)):
         if i == 0 or types[i] != l[-1][0]:
             l.append((types[i], []))
         l[-1][1].append(build_reference(refs[i]))
-    l = [type_name(t, len(vars)) + ' ' + ', '.join(vars) for t, vars in l]
+    l = [type_name(t, len(vars), lang) + ' ' + ', '.join(vars) for t, vars in l]
     if len(l) == 1:
         s += l[0]
     else:
-        s += "; ".join(l[:-1]) + " e " + l[-1]
+        s += "; ".join(l[:-1]) + (" e " if lang == 'it' else " and ") + l[-1]
     return s + ".\n"
 
-def build_sequence(basetype:str, typedims:List[Length], ref:VarReference):
-    s = ["gli ", "le "][typegender[basetype][0]]
+def build_sequence(basetype:str, typedims:List[Length], ref:VarReference, lang:str):
+    if lang == "en":
+        s = "the "
+    else:
+        s = ["gli ", "le "][typegender[basetype][0]]
     s += build_reference(typedims[0].value)
-    s += " " + typegender[basetype][2] + " "
+    s += " " + (typegender[basetype][2] if lang == "it" else engtypes[basetype]+'s') + " "
     s += build_reference(ref.addIndex('0'))[:-1]
     s += ", \, \ldots, \, "
     ref.idx[-1] = typedims[0].value + "-1"
@@ -115,23 +152,23 @@ def build_sequence(basetype:str, typedims:List[Length], ref:VarReference):
     s += ".\n"
     return s
 
-def build_block(prog:Block):
+def build_block(prog:Block, lang:str):
     s = ""
     for c in prog.code:
         if isinstance(c, VarDeclaration):
             pass
         elif isinstance(c, Repeat):
-            s += "- " + build_reference(c.bound) + " righe, la " + build_reference(c.idx) +  "-esima contenente "
+            s += "- " + build_reference(c.bound) + (" righe, la " if lang == "it" else " lines, the ") + build_reference(c.idx) +  ("-esima contenente " if lang == "it" else "-th of which consisting of ")
             if isinstance(c.code.code[0], InOutLine):
-                s += build_inout(c.code.code[0].types, c.code.code[0].items)
+                s += build_inout(c.code.code[0].types, c.code.code[0].items, lang)
             elif isinstance(c.code.code[0], InOutSequence):
-                s += build_sequence(c.code.code[0].type.base, c.code.code[0].type.dims, c.code.code[0].var)
+                s += build_sequence(c.code.code[0].type.base, c.code.code[0].type.dims, c.code.code[0].var, lang)
             else:
                 assert False
         elif isinstance(c, InOutSequence):
-            s += "- una riga contenente " + build_sequence(c.type.base, c.type.dims, c.var)
+            s += ("- una riga contenente " if lang == "it" else "- a line containing ") + build_sequence(c.type.base, c.type.dims, c.var, lang)
         elif isinstance(c, InOutLine):
-            s += "- una riga contenente " + build_inout(c.types, c.items)
+            s += ("- una riga contenente " if lang == "it" else "- a line containing ") + build_inout(c.types, c.items, lang)
         elif isinstance(c, FormatLine):
             assert False
         elif isinstance(c, UserCode):
@@ -149,15 +186,16 @@ def generate(name:str, prog:Block, lang:str, bounds:dict):
         T = rep.bound
         out = rep.code.code[-1]
         prog.code = rep.code.code[1:-2]
-        t = reptempl % (T, T, T, "%s", fmt.replace("{}", rep.idx), rep.idx, "%s")
+        t = templates[lang]['rep'] % (T, T, T, "%s", fmt.replace("{}", rep.idx), rep.idx, "%s")
     else:
         out = prog.code[-1]
         prog.code = prog.code[:-1]
-        t = template
-    prog = build_block(prog)
-    out = build_block(Block(out))[22:]
-    if out[:2] == "il":
-        out = out[1:]
-    elif out[0] == "l":
-        out = "l" + out
+        t = templates[lang]['std']
+    prog = build_block(prog, lang)
+    out = build_block(Block(out), lang)[22 if lang == "it" else 20:]
+    if lang == "it":
+        if out[:2] == "il":
+            out = out[1:]
+        elif out[0] == "l":
+            out = "l" + out
     return t % (prog, out)
