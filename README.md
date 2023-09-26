@@ -1,10 +1,57 @@
-# SLIDe: Simple Language for Input Description
+# make-templates
 
-This is a simple language for describing input files for competitive programming tasks (specifically targeted to the `italian-yaml` format of [CMS](https://github.com/cms-dev/cms)).
+This is a simple python-based tool generating solution templates (containing code for reading input and writing output), for tasks in either the Italian-yaml format for CMS or in the Terry format.
 
-### Language overview
+### Targets
 
-The language allows to write an `inout.spec` file like the following:
+The tool allows to generate from the input/output description:
+
+- `md`: description of the input/output format as Markdown code (especially designed for Terry)
+- `tex`: description of the input/output format as Latex code (especially designed for CMS)
+- solution templates in languages: `c`, `cpp`, `java`, `pas`, `py` (Python3), `cs`, `html` (form based on Javascript)
+
+Template code can be useful for writing solutions and validators, but that adaptation is left to end users.
+
+### Usage
+
+The tool can be used as follows, from the root directory of a task:
+
+```
+make-templates [-h] [-l LANG] [-d DESCRIPTION] [--limits LIMITS] [-t] [-c] [-n] [targets ...]
+```
+
+**Positional arguments:**
+
+- `targets`: Language targets that should be considered. If no targets are specified, the default targets are considered: c/cpp/java/pas/py/tex for CMS and c/cpp/java/md/pas/py for Terry.
+
+**Options:**
+
+- `-h`, `--help`: Show the help message and exit.
+- `-l LANG`, `--lang LANG`: Language to be used for generating the files (either *it* or *en*, defaults to *en*).
+- `-d DESCRIPTION`, `--description DESCRIPTION`: Path of the file containing the I/O description in SLIDe (defaults to `inout.slide`).
+- `--limits LIMITS`: Path of the file containing task limits (defaults to `gen/limiti.py`).
+- `-t`, `--terry`: Forces the tool to interpret the task as being in the Terry format.
+- `-c`, `--cms`: Forces the tool to interpret the task as being in the Italian-yaml format for CMS.
+- `-n`, `--no-replace`: Prevents the tool from replacing already-generated files (including task statements).
+
+### SLIDe: Simple Language for Input Description
+
+SLIDe is a simple language for describing most common input and output files for competitive programming tasks. It is designed to be convenient for most tasks, and not general enough to cover all tasks. In particular, it is not suited for interactive or grader-based tasks. The language allows to write an `inout.slide` file like the following simple example:
+
+```
+input:
+
+int N;
+double V[N];
+
+output:
+
+int W[N];
+```
+
+The output description **has to be a single line**, either with a single vector or with some values declared.
+
+A more complex (and valid) example is:
 
 ```
 /*
@@ -35,18 +82,6 @@ output:
 "Case #{}: " // something to prepend to each test
 int L;
 ```
-
-The output description **has to be a single line**, either with a single vector or with some values declared.
-
-### Targets
-
-The tool allows to generate from the input/output description:
-
-- `md`: description of the input/output format as Markdown code (especially designed for `terry`)
-- `tex`: description of the input/output format as Latex code (especially designed for `iiot`)
-- solution templates in languages: `c`, `cpp`, `java`, `pas`, `py` (Python3), `cs`, `html` (form based on Javascript)
-
-Template code can be useful for writing solutions and validators, but that adaptation is left to end users.
 
 ### Contribute
 
