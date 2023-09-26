@@ -7,6 +7,7 @@ import targets
 import importlib
 import argparse
 import yaml
+from os import path
 
 
 # Error listener to make sure that parsing errors are not ignored.
@@ -25,6 +26,8 @@ def main(args):
     if args.terry and args.cms:
         print("[ERROR] Cannot specify both --terry and --cms")
         exit(1)
+    if not path.isfile('task.yaml'):
+        print("[ERROR] File task.yaml not found")
 
     error_listener = FailOnError()
     input_stream = InputStream(''.join(open(args.description).readlines()))
@@ -45,20 +48,46 @@ def main(args):
     if len(err) > 0:
         exit(1)
 
-    format = "terry" # TODO: deduce task format from folder structure
+    task_yaml = yaml.safe_load(''.join(open('task.yaml', 'r').readlines()))
+
+    if args.terry:
+        format = "terry"
+    elif args.cms:
+        format = "cms"
+    elif path.isdir('statement') and path.isdir('solutions') and 'description' in task_yaml:
+        format = "terry"
+    elif path.isdir('testo') and path.isdir('att') and path.isdir('sol') and 'title' in task_yaml:
+        format = "cms"
+    else:
+        print("[ERROR] Cannot recognise task format")
+        exit(1)
+    if format == "terry":
+        att_folder = "statement"
+        sol_folder = "solutions"
+        txt_file = "statement/statement"
+    if format == "cms":
+        att_folder = "att"
+        sol_folder = "sol"
+        txt_file = "testo/" + ("english" if args.lang == "en" else "italian")
+
+    if args.limits is None:
+        args.limits = "gen/limiti.py" if format == "cms" else "managers/limits.py"
+    if not path.isfile(args.limits):
+        print("[ERROR] File {args.limits} not found")
+
+    spec = importlib.util.spec_from_file_location('limits', args.limits)
+    limits = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(limits)
+
     if len(args.targets) == 0:
         args.targets = terry_langs if format == "terry" else cms_langs
+
     for t in args.targets:
         if t not in dir(targets):
             print("[ERROR] Target '%s' not supported" % t)
             exit(1)
-
-        spec = importlib.util.spec_from_file_location('limits', args.limits)
-        limits = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(limits)
-        name = yaml.safe_load(''.join(open('task.yaml', 'r').readlines()))['name']
         # TODO: write files rather than printing on stdout
-        print(getattr(targets, t).generate(name, res, args.lang, limits.__dict__))
+        print(getattr(targets, t).generate(task_yaml['name'], res, args.lang, limits.__dict__))
 
 
 if __name__ == "__main__":
@@ -80,8 +109,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--limits",
-        default="gen/limiti.py",
-        help="Path of the file containing task limits (defaults to 'gen/limiti.py')",
+        help="Path of the file containing task limits (defaults to 'gen/limiti.py' for CMS and 'managers/limits.py' for Terry)",
     )
     parser.add_argument(
         "-t", "--terry",
