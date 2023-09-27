@@ -221,7 +221,7 @@ class Analyzer(IOParserVisitor):
             id = ctx.IDENT().getText()
             err = self.checkVar(id)
             if id != id.upper() or len(id) != 1:
-                err.append('Variables used to define array length should be single uppercase letters: "%s"' % id)
+                err.append('Variables used to define array lengths should be single uppercase letters: "%s"' % id)
             return err, Length(id, 'MAX'+id, set(['MAX'+id]))
         elif ctx.NUM():
             n = ctx.NUM().getText()

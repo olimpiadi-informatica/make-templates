@@ -1,6 +1,6 @@
 # make-templates
 
-This is a simple python-based tool generating solution templates (containing code for reading input and writing output), for tasks in either the Italian-yaml format for CMS or in the Terry format.
+This is a simple python-based tool generating solution templates (containing code for reading input and writing output), for tasks in either the yaml format for CMS or in the Terry format.
 
 ### Targets
 
@@ -22,16 +22,16 @@ make-templates [-h] [-l LANG] [-d DESCRIPTION] [--limits LIMITS] [-t] [-c] [-n] 
 
 **Positional arguments:**
 
-- `targets`: Language targets that should be considered. If no targets are specified, the default targets are considered: c/cpp/java/pas/py/tex for CMS and c/cpp/java/md/pas/py for Terry.
+- `targets`: Language targets that should be considered (if none specified, the default is c/cpp/java/pas/py/tex for CMS and c/cpp/java/md/pas/py for Terry)
 
 **Options:**
 
 - `-h`, `--help`: Show the help message and exit.
-- `-l LANG`, `--lang LANG`: Language to be used for generating the files (either *it* or *en*, defaults to *en*).
+- `-l LANG`, `--lang LANG`: Language to be used for generating the files (either *it* or *en*, defaults to *it* for Terry and *en* for CMS).
 - `-d DESCRIPTION`, `--description DESCRIPTION`: Path of the file containing the I/O description in SLIDe (defaults to `inout.slide`).
-- `--limits LIMITS`: Path of the file containing task limits (defaults to `gen/limiti.py`).
+- `--limits LIMITS`: Path of the file containing task limits (defaults to `gen/limiti.py` for CMS and `managers/limits.py` for Terry).
 - `-t`, `--terry`: Forces the tool to interpret the task as being in the Terry format.
-- `-c`, `--cms`: Forces the tool to interpret the task as being in the Italian-yaml format for CMS.
+- `-c`, `--cms`: Forces the tool to interpret the task as being in the yaml format for CMS.
 - `-n`, `--no-replace`: Prevents the tool from replacing already-generated files (including task statements).
 
 ### SLIDe: Simple Language for Input Description
@@ -83,6 +83,14 @@ output:
 int L;
 ```
 
-### Contribute
+### Further details
 
-The grammar is based on [ANTLR4](https://github.com/antlr/antlr4), compiled into a Python3 parser, validator and visitor. A VS code settings file is available in the repository, that should work after installing the ANTLR extension.
+The grammar is based on [ANTLR4](https://github.com/antlr/antlr4), compiled into a Python3 parser, validator and visitor. A VS code settings file is available in the repository, that should work after installing the ANTLR extension. The precise grammar can be read in files `grammar/IOLexer.g4` and `grammar/IOParser.g4` and is mostly self-explanatory. The validator checks the following constraints:
+
+- variables names $i$ and $j$ are not used (those names are reserved for loop variables);
+- when a variable is declared, there is no previous declaration with the same name (**ignoring case**);
+- when a varilable is referenced (for a length expression), the variable is a **single uppercase letter** with a previous declaration;
+- arithmetic operations between numeric constants are forbidden;
+- subtraction and division by a non-constant term is forbidden;
+- redundant parentheses around a primitive term are forbidden;
+- the output header formatter is only allowed if a `repeat` clause is present.

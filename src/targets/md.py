@@ -15,7 +15,8 @@ Ogni caso di test è composto come segue:
 
 ## Formato di output
 
-Il file di output deve contenere la risposta ai casi di test che sei riuscito a risolvere. Per ogni caso di test che hai risolto, il file di output deve contenere una riga con la dicitura "`%s`", dove `%s` è il numero del caso di test (a partire da $1$), seguita da%s"""
+Il file di output deve contenere la risposta ai casi di test che sei riuscito a risolvere. Per ogni caso di test che hai risolto, il file di output deve contenere una riga con la dicitura "`%s`", dove `%s` è il numero del caso di test (a partire da $1$), seguita da%s
+"""
 
 templates['it']['std'] = """
 ## Formato di input
@@ -26,7 +27,8 @@ Il file di input è composto come segue:
 
 ## Formato di output
 
-Il file di output deve contenere una riga composta da%s"""
+Il file di output deve contenere una riga composta da%s
+"""
 
 templates['en']['rep'] = """
 ## Input Format
@@ -39,7 +41,8 @@ Each test case consists of:
 
 ## Output Format
 
-The output file must contain the answer to the test cases you were able to solve. For each test case you solved, the output file must contain a line with "`%s`", where `%s` is the number of the test case (starting from $1$), followed by %s"""
+The output file must contain the answer to the test cases you were able to solve. For each test case you solved, the output file must contain a line with "`%s`", where `%s` is the number of the test case (starting from $1$), followed by %s
+"""
 
 templates['en']['std'] = """
 ## Input Format
@@ -50,7 +53,8 @@ The input file consists of:
 
 ## Output Format
 
-The output file must contain a single line consisting of %s"""
+The output file must contain a single line consisting of %s
+"""
 
 locale = {
     'en' : [],
@@ -198,4 +202,4 @@ def generate(name:str, prog:Block, lang:str, bounds:dict):
             out = out[1:]
         elif out[0] == "l":
             out = "l" + out
-    return t % (prog, out)
+    return t[1:] % (prog, out)

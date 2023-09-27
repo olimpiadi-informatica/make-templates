@@ -13,9 +13,11 @@ Ogni caso di test è composto come segue:
 \\begin{itemize}
 %s\end{itemize}
 
+
 \OutputFile
 
-Il file di output deve contenere la risposta ai casi di test che sei riuscito a risolvere. Per ogni caso di test che hai risolto, il file di output deve contenere una riga con la dicitura ``\\texttt{%s}'', dove \\texttt{%s} è il numero del caso di test (a partire da $1$), seguita da%s"""
+Il file di output deve contenere la risposta ai casi di test che sei riuscito a risolvere. Per ogni caso di test che hai risolto, il file di output deve contenere una riga con la dicitura ``\\texttt{%s}'', dove \\texttt{%s} è il numero del caso di test (a partire da $1$), seguita da%s
+"""
 
 templates['it']['std'] = """
 \InputFile
@@ -24,9 +26,11 @@ Il file di input è composto come segue:
 \\begin{itemize}
 %s\end{itemize}
 
+
 \OutputFile
 
-Il file di output deve contenere una riga composta da%s"""
+Il file di output deve contenere una riga composta da%s
+"""
 
 templates['en']['rep'] = """
 \InputFile
@@ -37,9 +41,11 @@ Each test case consists of:
 \\begin{itemize}
 %s\end{itemize}
 
+
 \OutputFile
 
-The output file must contain the answer to the test cases you were able to solve. For each test case you solved, the output file must contain a line with ``\\texttt{%s}'', where \\texttt{%s} is the number of the test case (starting from $1$), followed by %s"""
+The output file must contain the answer to the test cases you were able to solve. For each test case you solved, the output file must contain a line with ``\\texttt{%s}'', where \\texttt{%s} is the number of the test case (starting from $1$), followed by %s
+"""
 
 templates['en']['std'] = """
 \InputFile
@@ -48,9 +54,11 @@ The input file consists of:
 \\begin{itemize}
 %s\end{itemize}
 
+
 \OutputFile
 
-The output file must contain a single line consisting of %s"""
+The output file must contain a single line consisting of %s
+"""
 
 locale = {
     'en' : [],
@@ -198,4 +206,4 @@ def generate(name:str, prog:Block, lang:str, bounds:dict):
             out = out[1:]
         elif out[0] == "l":
             out = "l" + out
-    return t % (prog, out)
+    return t[1:] % (prog, out)
