@@ -50,6 +50,32 @@ def replace_section(lines : List[str], target : str, body : str):
         end += 1
     return lines[:start] + bodylines + lines[end:]
 
+def replace_start(lines : List[str], targets : List[str], lang : str, name : str):
+    j = 0
+    while lines[j][:1] != '#':
+        j += 1
+    while lines[j-1] == "\n":
+        j -= 1
+    i = j - 1
+    while lines[i-1][:5] == "> - _":
+        i -= 1
+    v = []
+    base = "Scarica la traccia" if lang == "it" else "Download the template"
+    tnames = {
+        "c"    : "C",
+        "cpp"  : "C++",
+        "cs"   : "C#",
+        "java" : "Java",
+        "pas"  : "Pascal",
+        "py"   : "Python"
+    }
+    for target in targets:
+        if target in tnames:
+            file = f"{name}.{target}"
+            tname = tnames[target]
+            v.append(f"> - _{base} in {tname}: [{file}]({file})_\n")
+    return lines[:i] + v + lines[j:]
+
 def main(args):
     # load task.yaml
     if not path.isfile('task.yaml'):
@@ -140,6 +166,8 @@ def main(args):
                 print(f"[WARNING] Skipping target {t}: {file} exists")
                 continue
             lines = replace_section(open(file, 'r').readlines(), t, body)
+            if t == "md":
+                lines = replace_start(lines, args.targets, args.lang, name)
             with open(file, 'w') as f:
                 f.writelines(lines)
         else:
