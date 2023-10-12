@@ -32,7 +32,7 @@ type_vals = {
     'int'       : '0',
     'long long' : '0',
     'double'    : '0.0',
-    'char'      : "' '",
+    'char'      : "'-'",
     'string'    : '0'
 }
 

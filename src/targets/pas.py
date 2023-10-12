@@ -33,7 +33,7 @@ type_vals = {
     'LongInt'    : '0',
     'Int64'      : '0',
     'Double'     : '0.0',
-    'Char'       : "' '",
+    'Char'       : "'-'",
     'AnsiString' : "''"
 }
 
