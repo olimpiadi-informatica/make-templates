@@ -71,7 +71,7 @@ double W[N]; // N values in a single line
 /*
  * Notation for M lines, each with 2 integers and a string
  */
-{int from, to; string label;}[M];
+{int efrom, eto; string elabel;}[M];
 
 // you can leave empty rows with no effect
 
@@ -80,7 +80,7 @@ int matrix[N][M]; // N lines with M integers each
 output:
 
 "Case #{}: " // something to prepend to each test
-int L;
+int L; string S; long key, value; char letter; double x;
 ```
 
 ### Further details
