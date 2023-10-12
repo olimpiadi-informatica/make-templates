@@ -28,11 +28,19 @@ type_dict = {
     'long'   : 'long long'
 }
 
+type_vals = {
+    'int'       : '0',
+    'long long' : '0',
+    'double'    : '0.0',
+    'char'      : "' '",
+    'string'    : '0'
+}
+
 type_formats = {
     'int'    : '%d',
     'long'   : '%lld',
     'double' : '%lf',
-    'char'   : '%c',
+    'char'   : ' %c',
     'string' : '%s'
 }
 
@@ -48,11 +56,11 @@ def build_type(t:VarType):
         type += "[%s]" % v
     return type, consts
 
-def build_reference(r):
+def build_reference(r, t):
     if isinstance(r, str):
         return r
     assert isinstance(r, VarReference)
-    return r.name + ''.join('[%s]' % i for i in r.idx)
+    return ('' if t == "string" else "&") + r.name + ''.join('[%s]' % i for i in r.idx)
 
 def build_declaration(d:VarDeclaration):
     type, consts = build_type(d.type)
@@ -65,11 +73,10 @@ def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
     if len(refs) == 0 and not (out and end):
         return ""
     s = "printf(%s);\n" if out else "assert(" + str(len(refs)) + " == scanf(%s));\n"
-    sep = ", " if out else ", &"
     e = "\\n" if out and end else " " if out and types[0] in type_formats else ""
     fs = " " if out else ""
     fmt = '"%s%s"' % (fs.join(type_formats[t] if t in type_formats else t for t in types), e)
-    return s % sep.join([fmt] + [build_reference(r) for r in refs])
+    return s % ", ".join([fmt] + [build_reference(refs[i], "string" if out else types[i]) for i in range(len(refs))])
 
 def build_consts(consts:set, bounds:dict):
     if len(consts) == 0:
@@ -100,6 +107,7 @@ def build_block(prog:Block, lang:str):
     cs = set()
     vs = {}
     s = ""
+    pending_declarations = []
     for c in prog.code:
         if isinstance(c, VarDeclaration):
             consts, type, ids = build_declaration(c)
@@ -107,28 +115,43 @@ def build_block(prog:Block, lang:str):
             if type not in vs:
                 vs[type] = set()
             vs[type] |= set(ids)
+            pending_declarations.append((type, ids))
         elif isinstance(c, Repeat):
             bc, bv, bs = build_block(c.code, lang)
             cs |= bc
-            vs.update(bv)
+            for k,v in bv.items():
+                if k not in vs:
+                    vs[k] = set()
+                vs[k] |= v
             if 'int' not in vs:
                 vs['int'] = set()
             vs['int'].add(c.idx)
             s += build_for(c.idx, c.start,  c.bound, indent(bs))
+            pending_declarations = []
         elif isinstance(c, InOutSequence):
             if 'int' not in vs:
                 vs['int'] = set()
             vs['int'].add('i')
             s += build_for('i', 0, c.type.dims[-1].value, indent(build_inout(c.out, [c.type.base], [c.var.addIndex('i')], False)))
             s += build_inout(c.out, [], [], True)
+            pending_declarations = []
         elif isinstance(c, InOutLine):
             s += build_inout(c.out, c.types, c.items, True)
+            pending_declarations = []
         elif isinstance(c, FormatLine):
             format = c.format[1:-1].replace('{}', '%d')
             s += build_inout(True, [format], [c.var], False)
         elif isinstance(c, UserCode):
             s += "// %s\n" % locale[lang][2]
         elif isinstance(c, Instruction):
+            for type, ids in pending_declarations:
+                if type in type_vals:
+                    s += " = ".join([id + ('[0]' if type == "string" else '') for id in ids] + [type_vals[type]]) + ";\n"
+                elif type[:4] == "char":
+                    assert len(ids) == 1
+                    t, l = type[:-1].split('[')
+                    s += "for (i = 0; i < %s; ++i) %s[i] = %s;\n" % (l, ids[0], type_vals[t])
+            pending_declarations = []
             s += "\n"
         else:
             raise Exception('Unrecognised instruction "%s"' % c)

@@ -65,6 +65,8 @@ def build_for(v:str, k:int, b:str, c:str):
     return "for %s in range(%s):\n%s" % (v, b if k == 0 else "1, %s+1" % b, c)
 
 def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
+    if len(refs) == 0 and (not out) and end:
+        return "input()\n"
     if len(refs) == 0 and not (out and end):
         return ""
     if out:
@@ -73,12 +75,12 @@ def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
     tt = [type_dict[t] for t in types]
     if len(tt) == 1:
         if tt[0] == 'str':
-            return s + "input.strip().split()\n"
-        return s + "%s(input.strip().split())\n" % tt[0]
+            return s + "input().strip()\n"
+        return s + "%s(input().strip())\n" % tt[0]
     elif len(refs) == 1:
-        return s + "list(map(%s, input.strip().split()))\n" % tt[0]
+        return s + "list(map(%s, input().strip().split()))\n" % tt[0]
     elif len(set(tt)) == 1:
-        return s + "map(%s, input.strip().split())\n" % tt[0]
+        return s + "map(%s, input().strip().split())\n" % tt[0]
     else:
         return s + "[f(v) for f, v in zip([%s], input().strip().split())]\n" % ', '.join(tt)
 
@@ -107,7 +109,7 @@ def build_block(prog:Block, lang:str):
             format = c.format.replace('{}', '%d')
             s += "print(%s %% %s, end='')\n" % (format, c.var)
         elif isinstance(c, UserCode):
-            s += "// %s\n" % locale[lang][2]
+            s += "# %s\n" % locale[lang][2]
         elif isinstance(c, Instruction):
             s += "\n"
         else:

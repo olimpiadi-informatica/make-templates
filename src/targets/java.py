@@ -11,6 +11,7 @@ import java.lang.*;
 public class %s {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
+        Locale.setDefault(Locale.US);
         InputStream fin = System.in;
         OutputStream fout = System.out;
         // %s
@@ -35,6 +36,14 @@ type_dict = {
     'string' : 'String'
 }
 
+type_vals = {
+    'int'    : '0',
+    'long'   : '0',
+    'double' : '0.0',
+    'char'   : "' '",
+    'String' : '""'
+}
+
 type_formats = {
     'int'    : '%d',
     'long'   : '%d',
@@ -56,7 +65,7 @@ def build_type(t:VarType):
     if type in type_dict:
         type = type_dict[type]
     if len(vals) == 0:
-        init = ""
+        init = " = " + type_vals[type]
     else:
         init = " = new " + type + ''.join('[%s]'%v for v in vals)
         type += ''.join('[]' for _ in vals)

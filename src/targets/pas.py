@@ -29,6 +29,14 @@ type_dict = {
     'string' : 'AnsiString'
 }
 
+type_vals = {
+    'LongInt'    : '0',
+    'Int64'      : '0',
+    'Double'     : '0.0',
+    'Char'       : "' '",
+    'AnsiString' : "''"
+}
+
 def build_type(t:VarType):
     consts = set()
     for x in t.dims:
@@ -54,9 +62,10 @@ def build_declaration(d:VarDeclaration):
 def build_for(v:str, k:int, b:str, c:str):
     return ("for %s:=%d to %s do" + (" begin\n%send;\n" if c.count('\n') > 1 else "\n%s")) % (v, k, b + ("-1" if k == 0 else ""), c)
 
-def build_inout(out:bool, refs:List[VarReference], end:bool):
+def build_inout(out:bool, refs:List, end:bool):
     cmd = ("Write" if out else "Read") + ("Ln" if end else "")
-    return cmd + '(' + ', '.join(build_reference(r) for r in refs) + ');\n'
+    not_fmt = len(refs) == 0 or not isinstance(refs[0], str)
+    return cmd + '(' + ', '.join(build_reference(r) + (", ' '" if out and not_fmt else "") for r in refs) + ');\n'
 
 def build_consts(consts:set, bounds:dict):
     if len(consts) == 0:
@@ -82,6 +91,7 @@ def build_block(prog:Block, lang:str):
     cs = set()
     vs = {}
     s = ""
+    pending_declarations = []
     for c in prog.code:
         if isinstance(c, VarDeclaration):
             consts, type, ids = build_declaration(c)
@@ -89,28 +99,45 @@ def build_block(prog:Block, lang:str):
             if type not in vs:
                 vs[type] = set()
             vs[type] |= set(ids)
+            pending_declarations.append((type, ids))
         elif isinstance(c, Repeat):
             bc, bv, bs = build_block(c.code, lang)
             cs |= bc
-            vs.update(bv)
+            for k,v in bv.items():
+                if k not in vs:
+                    vs[k] = set()
+                vs[k] |= v
             if 'LongInt' not in vs:
                 vs['LongInt'] = set()
             vs['LongInt'].add(c.idx)
             s += build_for(c.idx, c.start,  c.bound, indent(bs))
+            pending_declarations = []
         elif isinstance(c, InOutSequence):
             if 'LongInt' not in vs:
                 vs['LongInt'] = set()
             vs['LongInt'].add('i')
             s += build_for('i', 0, c.type.dims[-1].value, indent(build_inout(c.out, [c.var.addIndex('i')], False)))
             s += build_inout(c.out, [], True)
+            pending_declarations = []
         elif isinstance(c, InOutLine):
             s += build_inout(c.out, c.items, True)
+            pending_declarations = []
         elif isinstance(c, FormatLine):
             format = c.format[1:-1].split('{}')
-            s += build_inout(True, ['"%s"'%format[0], c.var, '"%s"'%format[1]], False)
+            s += build_inout(True, ["'%s'"%format[0], c.var, "'%s'"%format[1]], False)
         elif isinstance(c, UserCode):
             s = s[:-1] + "{ %s }\n" % locale[lang][2]
         elif isinstance(c, Instruction):
+            for type, ids in pending_declarations:
+                if type in type_vals:
+                    for id in ids:
+                        s += id + " := " + type_vals[type] + ";\n"
+                else:
+                    assert len(ids) == 1
+                    l, t = type[9:].split('] of ')
+                    s += "for i := 0 to %s do %s[i] := %s;\n\n" % (l, ids[0], type_vals[t])
+
+            pending_declarations = []
             s += "\n"
         else:
             raise Exception('Unrecognised instruction "%s"' % c)

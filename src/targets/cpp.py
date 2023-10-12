@@ -30,13 +30,21 @@ type_dict = {
     'long' : 'long long'
 }
 
-def build_type(t:VarType):
+type_vals = {
+    'int'    : '0',
+    'long long' : '0',
+    'double' : '0.0',
+    'char'   : "' '",
+    'string' : '""'
+}
+
+def build_type(t:VarType, initialize:bool):
     vals = [x.value for x in t.dims]
     type = t.base
     if type in type_dict:
         type = type_dict[type]
     if len(vals) == 0:
-        init = ""
+        init = " = " + type_vals[type] if initialize else ""
     elif len(vals) == 1:
         init = "(%s)" % vals[0]
     elif len(vals) == 2:
@@ -53,8 +61,8 @@ def build_reference(r):
     assert isinstance(r, VarReference)
     return r.name + ''.join('[%s]' % i for i in r.idx)
 
-def build_declaration(d:VarDeclaration):
-    type, init = build_type(d.type)
+def build_declaration(d:VarDeclaration, initialize:bool):
+    type, init = build_type(d.type, initialize)
     return type + ' ' + ', '.join(n + init for n in d.name) + ';\n'
 
 def build_for(v:str, k:int, b:str, c:str):
@@ -74,9 +82,12 @@ def build_inout(out:bool, refs:List[VarReference], end:bool, fmt:bool):
 
 def build_block(prog:Block, lang:str):
     s = ""
-    for c in prog.code:
+    for l, c in enumerate(prog.code):
         if isinstance(c, VarDeclaration):
-            s += build_declaration(c)
+            nl = l+1
+            while isinstance(prog.code[nl], VarDeclaration):
+                nl += 1
+            s += build_declaration(c, type(prog.code[nl]) == Instruction)
         elif isinstance(c, Repeat):
             s += build_for(c.idx, c.start, c.bound, indent(build_block(c.code, lang)))
         elif isinstance(c, InOutSequence):
