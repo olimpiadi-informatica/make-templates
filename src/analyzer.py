@@ -10,10 +10,14 @@ class Analyzer(IOParserVisitor):
         self.repeatVar = None
         self.definedVars = {'i', 'j'}
         self.loweredVars = {'i', 'j'}
+        self.keywords = {'ansistring', 'array', 'assert', 'begin', 'char', 'cin', 'class', 'const', 'convert', 'cout', 'do', 'double', 'end', 'fin', 'for', 'foreach', 'fout', 'from', 'if', 'import', 'in', 'input', 'int', 'is', 'it', 'label', 'list', 'long', 'main', 'map', 'namespace', 'new', 'next', 'of', 'print', 'printf', 'private', 'prnt', 'public', 'range', 'read', 'return', 'scanf', 'scn', 'static', 'stdin', 'stdout', 'str', 'string', 'sys', 'system', 'to', 'using', 'var', 'vector', 'void', 'while', 'write', 'yield', 'zip'}
 
 
     # Adds a variable in the definition list.
     def defineVar(self, var:str):
+        if var.lower() in self.keywords:
+            self.definedVars.add(var)
+            return ['Variable name "%s" forbidden' % var]
         if var.lower() in self.loweredVars:
             self.definedVars.add(var)
             return ['Redefinition of variable "%s"' % var]
