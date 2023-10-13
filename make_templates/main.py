@@ -1,18 +1,18 @@
-import importlib
 import argparse
 import yaml
 from os import path, symlink
 from copy import deepcopy
 from re import fullmatch
 from typing import List
+from importlib import util
 
 from antlr4 import InputStream, CommonTokenStream
 from antlr4.error.ErrorListener import ErrorListener
 
-from src.parser.IOLexer import IOLexer
-from src.parser.IOParser import IOParser
-from src.analyzer import Analyzer
-from src import targets
+from .parser.IOLexer import IOLexer
+from .parser.IOParser import IOParser
+from .analyzer import Analyzer
+from . import targets
 
 
 # Error listener to make sure that parsing errors are not ignored.
@@ -146,8 +146,8 @@ def main(args):
     if not path.isfile(args.limits):
         print(f"[ERROR] File {args.limits} not found")
         exit(1)
-    spec = importlib.util.spec_from_file_location('limits', args.limits)
-    limits = importlib.util.module_from_spec(spec)
+    spec = util.spec_from_file_location('limits', args.limits)
+    limits = util.module_from_spec(spec)
     spec.loader.exec_module(limits)
 
     # process targets

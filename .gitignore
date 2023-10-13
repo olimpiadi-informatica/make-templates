@@ -1,8 +1,8 @@
 .DS_Store
 **/__pycache__
 grammar/.antlr
-src/parser/*.interp
-src/parser/*.tokens
+make_templates/parser/*.interp
+make_templates/parser/*.tokens
 venv/
 dist/
 make_templates.egg-info/
