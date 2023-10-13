@@ -8,7 +8,7 @@ setup(
     py_modules=['make_templates'],
     packages=find_packages(),
     install_requires=[
-        "antlr4-python3-runtime==4.9.3",
+        "antlr4-python3-runtime",
         "pyyaml"
     ],
     url='http://olinfo.it',
