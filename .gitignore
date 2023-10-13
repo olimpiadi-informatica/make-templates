@@ -3,3 +3,6 @@
 grammar/.antlr
 src/parser/*.interp
 src/parser/*.tokens
+venv/
+dist/
+make_templates.egg-info/
