@@ -19,5 +19,6 @@ setup(
         'make-templates=make_templates.main:script'
     ]
     },
-    description='Tool to produce templates for IOI-style tasks from an input/output description.'
+    description='Tool to produce templates for IOI-style tasks from an input/output description.',
+    long_description_content_type='text/markdown',
 )
