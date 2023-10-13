@@ -41,14 +41,14 @@ for t in "$@"; do
     echo
     echo ">> TEST: $dir <<"
     echo
-    python3 ../../src/make-templates.py --limits limits.py -t
+    python3 ../../make_templates.py --limits limits.py -t
     echo "Terry output generated."
     cd statement
     check_cms $dir
     check_terry $dir
     cd ..
     echo
-    python3 ../../src/make-templates.py --limits limits.py -c
+    python3 ../../make_templates.py --limits limits.py -c
     echo "CMS output generated."
     cd att
     check_cms $dir

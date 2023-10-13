@@ -1,16 +1,18 @@
-from antlr4 import InputStream, CommonTokenStream
-from antlr4.error.ErrorListener import ErrorListener
-from parser.IOLexer import IOLexer
-from parser.IOParser import IOParser
-from analyzer import Analyzer
-from typing import List
-import targets
 import importlib
 import argparse
 import yaml
 from os import path, symlink
 from copy import deepcopy
 from re import fullmatch
+from typing import List
+
+from antlr4 import InputStream, CommonTokenStream
+from antlr4.error.ErrorListener import ErrorListener
+
+from src.parser.IOLexer import IOLexer
+from src.parser.IOParser import IOParser
+from src.analyzer import Analyzer
+from src import targets
 
 
 # Error listener to make sure that parsing errors are not ignored.
@@ -182,7 +184,7 @@ def main(args):
                 symlink("../" + file, link)
 
 
-if __name__ == "__main__":
+def script():
     parser = argparse.ArgumentParser(epilog="This script should be run in the root directory of a task.")
     parser.add_argument(
         "targets",
@@ -218,3 +220,7 @@ if __name__ == "__main__":
         help="prevents the tool from replacing already-generated files (including task statements)",
     )
     main(parser.parse_args())
+
+
+if __name__ == "__main__":
+    script()

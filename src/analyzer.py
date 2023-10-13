@@ -1,6 +1,6 @@
-from parser.IOParser import IOParser
-from parser.IOParserVisitor import IOParserVisitor
-from tree import *
+from .parser.IOParser import IOParser
+from .parser.IOParserVisitor import IOParserVisitor
+from .tree import *
 
 # Visitor analysing a parse tree and returning: list of errors, code structure, ?
 class Analyzer(IOParserVisitor):

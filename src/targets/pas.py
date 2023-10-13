@@ -1,6 +1,6 @@
 import sys
 sys.path.append('..')
-from tree import *
+from ..tree import *
 
 template = """{ %s }
 
