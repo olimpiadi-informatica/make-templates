@@ -94,3 +94,17 @@ The grammar is based on [ANTLR4](https://github.com/antlr/antlr4), compiled into
 - subtraction and division by a non-constant term is forbidden;
 - redundant parentheses around a primitive term are forbidden;
 - the output header formatter is only allowed if a `repeat` clause is present.
+
+### Development
+
+While adding support for a new target language, you should:
+
+- write the language generator in `make_templates/targets/<lang code>.py`
+- import it in `make_templates/targets/__init__.py`
+- add a test for the language in `tests/test.sh`, function `check_terry`
+
+Before pushing any new commit, make sure that the automated tests pass.
+
+Each time a new commit is pushed, a publish action towards [test-pypi](https://test.pypi.org) is triggered. **The action will fail unless the build number in `setup.py` is increased.**
+
+Each time a new tag is pushed, a publish action towards [pypi](https://pypi.org) is triggered. **Remember to increase the minor (or major) version number to match the new tag pushed,** and reset the build number to zero.

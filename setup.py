@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-v = '0.1'
+v = '0.1.001'
 
 setup(
     name='make-templates',
