@@ -8,9 +8,9 @@ The tool allows to generate from the input/output description:
 
 - `md`: description of the input/output format as Markdown code (especially designed for Terry)
 - `tex`: description of the input/output format as Latex code (especially designed for CMS)
-- solution templates in languages: `c`, `cpp`, `java`, `pas`, `py` (Python3), `cs`, `html` (form based on Javascript)
+- solution templates in languages: `c`, `cpp`, `cs`, `eps` ([Executable PseudoCode](https://demo.fibonacci.olinfo.it/ide)), `go`, `html` (form based on Javascript), `java`, `pas`, `py` (Python3)
 
-Template code can be useful for writing solutions and validators, but that adaptation is left to end users.
+Template code can be useful for writing solutions and validators, but that adaptation is left to end users. Targets `eps`, `go` and `html` are still under development.
 
 ### Usage
 
@@ -22,7 +22,7 @@ make-templates [-h] [-l LANG] [-d DESCRIPTION] [--limits LIMITS] [-t] [-c] [-n] 
 
 **Positional arguments:**
 
-- `targets`: Language targets that should be considered (if none specified, the default is c/cpp/java/pas/py/tex for CMS and c/cpp/java/md/pas/py for Terry)
+- `targets`: Language targets that should be considered (if none specified, the default is c/cpp/java/pas/py/tex for CMS and c/cpp/cs/eps/go/html/java/md/pas/py for Terry)
 
 **Options:**
 
@@ -102,6 +102,8 @@ While adding support for a new target language, you should:
 - write the language generator in `make_templates/targets/<lang code>.py`
 - import it in `make_templates/targets/__init__.py`
 - add a test for the language in `tests/test.sh`, function `check_terry`
+- add the long name for the target in dictionary `tnames` in `make_templates/main.py:66`
+- update this README accordingly
 
 Before pushing any new commit, make sure that the automated tests pass.
 

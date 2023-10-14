@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-v = '0.1.001'
+v = '0.1.002'
 
 setup(
     name='make-templates',
@@ -8,7 +8,7 @@ setup(
     py_modules=['make_templates'],
     packages=find_packages(),
     install_requires=[
-        "antlr4-python3-runtime",
+        "antlr4-python3-runtime==4.9.3",
         "pyyaml"
     ],
     url='http://olinfo.it',
