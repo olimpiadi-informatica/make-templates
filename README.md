@@ -105,8 +105,16 @@ While adding support for a new target language, you should:
 - add the long name for the target in dictionary `tnames` in `make_templates/main.py:66`
 - update this README accordingly
 
-Before pushing any new commit, make sure that the automated tests pass.
-
 Each time a new commit is pushed, a publish action towards [test-pypi](https://test.pypi.org) is triggered. **The action will fail unless the build number in `setup.py` is increased.**
 
 Each time a new tag is pushed, a publish action towards [pypi](https://pypi.org) is triggered. **Remember to increase the minor (or major) version number to match the new tag pushed,** and reset the build number to zero.
+
+Before pushing any new commit, make sure that the automated tests pass and that the version number is increased.
+In order to ensure that build version numbers are increased at every pushed commit, we recommend to add the following pre-commit hook in `.git/hooks/pre-commit`:
+
+```
+build=`head -n 1 README.md | sed 's|^.*\.||'`
+next=`printf "%03d" $[build+1]`
+sed -i "" "s|$build$|$next|" README.md
+git add README.md
+```
