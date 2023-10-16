@@ -1,12 +1,15 @@
 from setuptools import setup, find_packages
 
-v = '0.1.003'
+def find_version():
+    with open("README.md", "r") as f:
+        return f.readline()[17:].strip()
 
 setup(
     name='make-templates',
-    version=v,
+    version=find_version(),
     py_modules=['make_templates'],
     packages=find_packages(),
+    package_data={'': ['README.md']},
     install_requires=[
         "antlr4-python3-runtime==4.13.1",
         "pyyaml"

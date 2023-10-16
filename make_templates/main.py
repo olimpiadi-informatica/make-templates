@@ -5,6 +5,7 @@ from copy import deepcopy
 from re import fullmatch
 from typing import List
 from importlib import util
+from importlib.resources import files
 
 from antlr4 import InputStream, CommonTokenStream
 from antlr4.error.ErrorListener import ErrorListener
@@ -13,6 +14,11 @@ from .parser.IOLexer import IOLexer
 from .parser.IOParser import IOParser
 from .analyzer import Analyzer
 from . import targets
+
+
+def find_version():
+    with files('make_templates').joinpath('..').joinpath('README.md').open() as f:
+        return f.readline()[17:].strip()
 
 
 # Error listener to make sure that parsing errors are not ignored.
@@ -185,7 +191,10 @@ def main(args):
 
 
 def script():
-    parser = argparse.ArgumentParser(epilog="This script should be run in the root directory of a task.")
+    parser = argparse.ArgumentParser(
+        description="make-templates " + find_version(),
+        epilog="This script should be run in the root directory of a task.",
+    )
     parser.add_argument(
         "targets",
         nargs="*",
