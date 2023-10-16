@@ -1,7 +1,7 @@
 {
     "antlr4.generation": {
     
-        "outputDir": "../src/parser",
+        "outputDir": "../make_templates/parser",
         "mode": "external",
         "language": "Python3",
         "listeners": false,

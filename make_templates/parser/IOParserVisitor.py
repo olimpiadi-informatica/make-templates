@@ -1,6 +1,6 @@
-# Generated from /Users/harniver/Git/olimpiadi/slide/grammar/IOParser.g4 by ANTLR 4.9.2
+# Generated from /Users/harniver/Git/olimpiadi/make-templates/grammar/IOParser.g4 by ANTLR 4.13.1
 from antlr4 import *
-if __name__ is not None and "." in __name__:
+if "." in __name__:
     from .IOParser import IOParser
 else:
     from IOParser import IOParser
