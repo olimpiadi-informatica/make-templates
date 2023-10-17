@@ -9,7 +9,7 @@ setup(
     version=find_version(),
     py_modules=['make_templates'],
     packages=find_packages(),
-    package_data={'': ['README.md']},
+    package_data={'make_templates': ['README.md']},
     install_requires=[
         "antlr4-python3-runtime==4.13.1",
         "pyyaml"

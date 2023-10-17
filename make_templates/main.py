@@ -17,7 +17,7 @@ from . import targets
 
 
 def find_version():
-    with files('make_templates').joinpath('..').joinpath('README.md').open() as f:
+    with files('make_templates').joinpath('README.md').open() as f:
         return f.readline()[17:].strip()
 
 
