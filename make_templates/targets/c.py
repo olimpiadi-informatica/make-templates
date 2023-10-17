@@ -40,7 +40,7 @@ type_formats = {
     'int'    : '%d',
     'long'   : '%lld',
     'double' : '%lf',
-    'char'   : ' %c',
+    'char'   : '%c',
     'string' : '%s'
 }
 
@@ -75,7 +75,7 @@ def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
     s = "printf(%s);\n" if out else "assert(" + str(len(refs)) + " == scanf(%s));\n"
     e = "\\n" if out and end else " " if out and types[0] in type_formats else ""
     fs = " " if out else ""
-    fmt = '"%s%s"' % (fs.join(type_formats[t] if t in type_formats else t for t in types), e)
+    fmt = '"%s%s"' % (fs.join(" %c" if (t == "char" and not out) else type_formats[t] if t in type_formats else t for t in types), e)
     return s % ", ".join([fmt] + [build_reference(refs[i], "string" if out else types[i]) for i in range(len(refs))])
 
 def build_consts(consts:set, bounds:dict):

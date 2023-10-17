@@ -108,10 +108,11 @@ def build_inout(out:bool, types, refs:List[VarReference], end:bool):
         return ""
     if out:
         v = ['{'+build_reference(r)+'}' for r in refs]
-        if types != "":
+        fmt = types != ""
+        if fmt:
             types = types % v[0]
             v = v[1:]
-        return ('streamWriter.Write' + ('Line($"%s");\n' if end else '($"%s ");\n')) % (types + " ".join(r for r in v))
+        return ('streamWriter.Write' + ('Line($"%s");\n' if end else '($"%s ");\n' if not fmt else '($"%s");\n')) % (types + " ".join(r for r in v))
     s = ""
     for i in range(len(types)):
         t = types[i]

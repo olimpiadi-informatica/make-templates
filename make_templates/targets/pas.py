@@ -65,7 +65,7 @@ def build_for(v:str, k:int, b:str, c:str):
 def build_inout(out:bool, refs:List, end:bool):
     cmd = ("Write" if out else "Read") + ("Ln" if end else "")
     not_fmt = len(refs) == 0 or not isinstance(refs[0], str)
-    return cmd + '(' + ', '.join(build_reference(r) + (", ' '" if out and not_fmt else "") for r in refs) + ');\n'
+    return cmd + '(' + (", ' ', " if out and not_fmt else ", ").join(build_reference(r) for r in refs) + (", ' '" if out and not_fmt and not end else '') + ');\n'
 
 def build_consts(consts:set, bounds:dict):
     if len(consts) == 0:
