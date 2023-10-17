@@ -7,7 +7,7 @@ function check() {
     target=$1
     shift 1
     cat ../att/input.txt | "$@" > output.$target.txt
-    diff -b ../att/output.txt <(cat output.$target.txt | sed 's|E[+]00*||g;s|\.00* | |g;s|\.00*$||')
+    diff ../att/output.txt <(cat output.$target.txt | sed 's|  0\.0| 0.0|g;s|E[+]00*||g;s|\.00* | |g;s|\.00*$||')
 }
 
 function check_cms() {
@@ -41,14 +41,14 @@ for t in "$@"; do
     echo
     echo ">> TEST: $dir <<"
     echo
-    python3 ../../make_templates.py --limits limits.py -t
+    make-templates --limits limits.py -t
     echo "Terry output generated."
     cd statement
     check_cms $dir
     check_terry $dir
     cd ..
     echo
-    python3 ../../make_templates.py --limits limits.py -c
+    make-templates --limits limits.py -c
     echo "CMS output generated."
     cd att
     check_cms $dir
