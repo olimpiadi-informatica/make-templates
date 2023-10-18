@@ -105,7 +105,7 @@ def main(args):
         parser.addErrorListener(error_listener)
         analyzer = Analyzer()
         err, res = analyzer.visitFileSpec(parser.fileSpec())
-    except e:
+    except Exception as e:
         print("[ERROR] Parsing failed, aborting")
         exit(1)
     for e in err:
