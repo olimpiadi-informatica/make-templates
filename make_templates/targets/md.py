@@ -7,6 +7,20 @@ templates = {"it" : {}, "en" : {}}
 templates['it']['rep'] = """
 ## Formato di input
 
+La prima riga del file di input contiene un intero $%s$, il numero di casi di test. Seguono $%s$ casi di test, ognuno preceduto da una riga vuota.
+
+Ogni caso di test è composto come segue:
+
+%s
+
+## Formato di output
+
+Il file di output deve contenere $%s$ righe relative ai diversi casi di test, ciascuna composta da%s
+"""
+
+templates['it']['fmt'] = """
+## Formato di input
+
 La prima riga del file di input contiene un intero $%s$, il numero di casi di test. Seguono $%s$ casi di test, numerati da $1$ a $%s$. Ogni caso di test è preceduto da una riga vuota.
 
 Ogni caso di test è composto come segue:
@@ -31,6 +45,20 @@ Il file di output deve contenere una riga composta da%s
 """
 
 templates['en']['rep'] = """
+## Input Format
+
+The first line of the input file contains a single integer $%s$, the number of test cases. $%s$ test cases follow, each preceded by an empty line.
+
+Each test case consists of:
+
+%s
+
+## Output Format
+
+The output file must contain $%s$ lines corresponding to the test cases, each consisting of %s
+"""
+
+templates['en']['fmt'] = """
 ## Input Format
 
 The first line of the input file contains a single integer $%s$, the number of test cases. $%s$ test cases follow, numbered from $1$ to $%s$, each preceded by an empty line.
@@ -186,11 +214,14 @@ def build_block(prog:Block, lang:str):
 def generate(name:str, prog:Block, lang:str, bounds:dict):
     if isinstance(prog.code[-1], Repeat):
         rep = prog.code[-1]
-        fmt = rep.code.code[-2].format[1:-1]
+        fmt = rep.code.code[-2].format[1:-1] if isinstance(rep.code.code[-2], FormatLine) else ""
         T = rep.bound
         out = rep.code.code[-1]
         prog.code = rep.code.code[1:-2]
-        t = templates[lang]['rep'] % (T, T, T, "%s", fmt.replace("{}", rep.idx), rep.idx, "%s")
+        if fmt == "":
+            t = templates[lang]['rep'] % (T, T, "%s", rep.bound, "%s")
+        else:
+            t = templates[lang]['fmt'] % (T, T, T, "%s", fmt.replace("{}", rep.idx), rep.idx, "%s")
     else:
         out = prog.code[-1]
         prog.code = prog.code[:-1]

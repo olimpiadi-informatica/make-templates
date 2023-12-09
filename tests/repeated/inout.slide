@@ -1,0 +1,9 @@
+repeat test upto T:
+
+input:
+
+string N;
+
+output:
+
+int ans;
