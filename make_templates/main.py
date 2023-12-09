@@ -85,6 +85,9 @@ def replace_start(lines : List[str], targets : List[str], lang : str, name : str
     return lines[:i] + v + lines[j:]
 
 def main(args):
+    if args.version:
+        print("make-templates " + find_version())
+        exit(0)
     # load task.yaml
     if not path.isfile('task.yaml'):
         print("[ERROR] File task.yaml not found")
@@ -194,6 +197,11 @@ def script():
     parser = argparse.ArgumentParser(
         description="make-templates " + find_version(),
         epilog="This script should be run in the root directory of a task.",
+    )
+    parser.add_argument(
+        "-v", "--version",
+        action="store_true",
+        help="prints the version number and exits",
     )
     parser.add_argument(
         "targets",

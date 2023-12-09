@@ -83,6 +83,9 @@ def build_consts(consts:set, bounds:dict):
         return ""
     s = ""
     for c in consts:
+        if c not in bounds:
+            print(f"[ERROR] {c} missing in limits.py but {c[-1]} is used to define array lengths")
+            exit(1)
         s += "#define %s %s\n" % (c, bounds[c])
     return s + "\n"
 
