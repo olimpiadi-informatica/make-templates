@@ -2,7 +2,7 @@ import argparse
 import yaml
 from os import path, symlink
 from copy import deepcopy
-from re import fullmatch
+from re import fullmatch, sub
 from typing import List
 from importlib import util
 from importlib.resources import files
@@ -168,6 +168,8 @@ def main(args):
             exit(1)
         name = task_yaml['name']
         body = getattr(targets, t).generate(name, deepcopy(res), args.lang, limits.__dict__)
+        body = sub('\n +\n', '\n\n', body)
+        body = sub('\n +\n', '\n\n', body)
         if t in ['md', 'tex']:
             file = txt_file + '.' + t
             if not path.isfile(file):

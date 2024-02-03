@@ -1,4 +1,4 @@
-# make-templates 0.2.004
+# make-templates 0.2.005
 
 This is a simple python-based tool generating solution templates (containing code for reading input and writing output), for tasks in either the yaml format for CMS or in the Terry format.
 

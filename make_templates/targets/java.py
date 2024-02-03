@@ -18,12 +18,21 @@ public class %s {
         // fin = new FileInputStream("input.txt");
         // fout = new FileOutputStream("output.txt");
 
-        Scanner scn = new Scanner(fin);
-        PrintStream prnt = new PrintStream(fout);
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fout));
+        reader = new BufferedReader(new InputStreamReader(fin));
+        scn = new StringTokenizer(reader.readLine());
 
 %s
-        fout.flush();
+        writer.flush();
     }
+
+    static String next() throws IOException {
+        while (!scn.hasMoreTokens()) scn = new StringTokenizer(reader.readLine());
+        return scn.nextToken();
+    }
+
+    static BufferedReader reader;
+    static StringTokenizer scn;
 }
 """
 
@@ -52,9 +61,12 @@ type_formats = {
     'string' : '%s'
 }
 
-read_dict = {
-    'string' : '()',
-    'char' : '().charAt(0)'
+type_read = {
+    'int'    : 'Integer.parseInt(%s)',
+    'long'   : 'Long.parseLong(%s)',
+    'double' : 'Double.parseDouble(%s)',
+    'char'   : '%s.charAt(0)',
+    'string' : '%s'
 }
 
 pending_declarations = {}
@@ -88,13 +100,15 @@ def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
     if len(refs) == 0 and not (out and end):
         return ""
     if out:
-        fmt = '"%s%s"' % (" ".join(type_formats[t] if t in type_formats else t for t in types), "\\n" if end else " " if types[0] in type_formats else "")
-        return "prnt.format(%s);\n" % ", ".join([fmt] + [build_reference(r) for r in refs])
+        s = "writer.write(' ');\n".join("writer.write(%s);\n" % (("%s" if t == "string" else "String.valueOf(%s)") % build_reference(r)) for t,r in zip(types,refs))
+        if end is not None:
+            s += "writer.write('%s');\n" % ('\\n' if end else ' ')
+        return s
     s = ""
     for i in range(len(types)):
         t = types[i]
         r = refs[i]
-        s += pending_declarations[r.name] + build_reference(r) + " = scn.next" + (read_dict[t] if t in read_dict else t.capitalize()+'()') + ";\n"
+        s += pending_declarations[r.name] + build_reference(r) + " = " + type_read[t] % "next()" + ";\n"
     return s
 
 def build_block(prog:Block, lang:str):
@@ -121,8 +135,10 @@ def build_block(prog:Block, lang:str):
         elif isinstance(c, InOutLine):
             s += build_inout(c.out, c.types, c.items, True)
         elif isinstance(c, FormatLine):
-            format = c.format[1:-1].replace('{}', '%d')
-            s += build_inout(True, [format], [c.var], False)
+            pre, post = c.format[1:-1].split('{}')
+            s += "writer.write(\"%s\");\n" % pre
+            s += build_inout(True, ['int'], [c.var], None)
+            s += "writer.write(\"%s\");\n" % post
         elif isinstance(c, UserCode):
             s += "// %s\n" % locale[lang][2]
         elif isinstance(c, Instruction):
