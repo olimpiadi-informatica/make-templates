@@ -1,6 +1,7 @@
 from . import c
 from . import cpp
 from . import cs
+from . import html
 from . import java
 from . import md
 from . import pas
