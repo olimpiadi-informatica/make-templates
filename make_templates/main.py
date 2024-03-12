@@ -77,7 +77,8 @@ def replace_start(lines : List[str], targets : List[str], lang : str, name : str
         "html" : "JavaScript",
         "java" : "Java",
         "pas"  : "Pascal",
-        "py"   : "Python"
+        "py"   : "Python",
+        "vb"   : "VisualBasic"
     }
     for target in targets:
         if target in tnames:

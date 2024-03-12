@@ -43,11 +43,14 @@ function check_cms() {
 function check_terry() {
     echo "CS..."
     csc $dir.cs | tail -n +4
-    check cs mono ${dir}.exe
+    check cs mono $dir.exe
     echo "GO..."
-    check go go run ${dir}.go
+    check go go run $dir.go
     echo "HTML..."
     check html browser $dir.html
+    echo "VB..."
+    vbnc $dir.vb | grep ": error"
+    check vb mono $dir.exe
 }
 
 for t in "$@"; do

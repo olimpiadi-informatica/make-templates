@@ -8,3 +8,4 @@ from . import md
 from . import pas
 from . import py
 from . import tex
+from . import vb
