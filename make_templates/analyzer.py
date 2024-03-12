@@ -10,7 +10,7 @@ class Analyzer(IOParserVisitor):
         self.repeatVar = None
         self.definedVars = {'i', 'j'}
         self.loweredVars = {'i', 'j'}
-        self.keywords = {'ansistring', 'array', 'assert', 'begin', 'char', 'cin', 'class', 'const', 'convert', 'cout', 'do', 'double', 'end', 'fin', 'for', 'foreach', 'fout', 'from', 'if', 'import', 'in', 'input', 'int', 'is', 'it', 'label', 'list', 'long', 'main', 'map', 'namespace', 'new', 'next', 'of', 'print', 'printf', 'private', 'prnt', 'public', 'range', 'read', 'return', 'scanf', 'scn', 'static', 'stdin', 'stdout', 'str', 'string', 'sys', 'system', 'to', 'using', 'var', 'vector', 'void', 'while', 'write', 'yield', 'zip'}
+        self.keywords = {'ansistring', 'array', 'assert', 'begin', 'bufio', 'byte', 'char', 'cin', 'class', 'const', 'convert', 'cout', 'do', 'double', 'end', 'fin', 'float', 'float64', 'fmt', 'for', 'foreach', 'fout', 'from', 'if', 'import', 'in', 'input', 'int', 'int64', 'is', 'it', 'label', 'list', 'long', 'main', 'make', 'map', 'namespace', 'new', 'next', 'of', 'os', 'print', 'printf', 'private', 'prnt', 'public', 'range', 'read', 'return', 'scanf', 'scn', 'static', 'stdin', 'stdout', 'str', 'strconv', 'string', 'sys', 'system', 'to', 'using', 'var', 'vector', 'void', 'while', 'write', 'yield', 'zip'}
 
 
     # Adds a variable in the definition list.

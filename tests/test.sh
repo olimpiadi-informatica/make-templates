@@ -44,6 +44,8 @@ function check_terry() {
     echo "CS..."
     csc $dir.cs | tail -n +4
     check cs mono ${dir}.exe
+    echo "GO..."
+    check go go run ${dir}.go
     echo "HTML..."
     check html browser $dir.html
 }

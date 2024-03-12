@@ -73,6 +73,7 @@ def replace_start(lines : List[str], targets : List[str], lang : str, name : str
         "c"    : "C",
         "cpp"  : "C++",
         "cs"   : "C#",
+        "go"   : "Go",
         "html" : "JavaScript",
         "java" : "Java",
         "pas"  : "Pascal",
