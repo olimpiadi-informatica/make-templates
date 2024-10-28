@@ -17,7 +17,9 @@ inputLine
 
 outputLine
     : values
+    | vectors
     | vector
+    | matrix
     ;
 
 values : ( homoValues SEMICOL )+ ;

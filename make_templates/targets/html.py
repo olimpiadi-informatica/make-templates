@@ -211,6 +211,7 @@ def build_block(prog:Block, lang:str):
     t = ""
     u = ""
     testref = ""
+    outsec = False
     for i in range(len(prog.code)):
         c = prog.code[i]
         if isinstance(c, VarDeclaration):
@@ -234,18 +235,22 @@ def build_block(prog:Block, lang:str):
                     pending_declarations[n] = "var "
         elif isinstance(c, Repeat):
             ss, tt = build_block(c.code, lang)
-            s += build_for(c.idx, c.start,  c.bound, indent(ss))
+            temp = build_for(c.idx, c.start,  c.bound, indent(ss))
+            if outsec:
+                u += temp
+            else:
+                s += temp
             t += tt
         elif isinstance(c, InOutSequence):
             temp = build_for('i', 0, c.type.dims[-1].value, indent(build_inout(c.out, [c.type.base], [c.var.addIndex('i')], False)))
             temp += build_inout(c.out, [], [], True)
-            if c.out:
+            if outsec and c.out:
                 u += temp
             else:
                 s += temp
         elif isinstance(c, InOutLine):
             temp = build_inout(c.out, c.types, c.items, True)
-            if c.out:
+            if outsec and c.out:
                 u += temp
             else:
                 s += temp
@@ -253,6 +258,7 @@ def build_block(prog:Block, lang:str):
             testref = "Case #${%s} " % c.var
             u += "yield `%s`;\n" % c.format[1:-1].replace('{}', '${%s}' % c.var)
         elif isinstance(c, UserCode):
+            outsec = True
             u += "var " + get_output_vars() + " = solve(%s);\n" % (', '.join(input_vars))
         elif isinstance(c, Instruction):
             if len(s) < 2 or s[-2] != '\n':

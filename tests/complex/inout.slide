@@ -24,4 +24,4 @@ int matrix[N][M]; // N lines with M integers each
 output:
 
 "Case #{}: " // something to prepend to each test
-int L; string S; long key, value; char letter; double x;
+{int L; long key, value; double x;}[N];

@@ -6,4 +6,4 @@ string N;
 
 output:
 
-int ans;
+int ans, oth; char tag;

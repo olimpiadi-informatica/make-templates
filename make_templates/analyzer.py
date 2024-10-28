@@ -100,10 +100,7 @@ class Analyzer(IOParserVisitor):
 
     # Visit a parse tree produced by IOParser#outputLine.
     def visitOutputLine(self, ctx:IOParser.OutputLineContext):
-        if ctx.values():
-            return self.visitValues(ctx.values())
-        else:
-            return self.visitVector(ctx.vector())
+        return self.visitInputLine(ctx)
 
 
     # Visit a parse tree produced by IOParser#values.

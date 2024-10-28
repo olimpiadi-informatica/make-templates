@@ -27,7 +27,7 @@ class FailOnError(ErrorListener):
         assert False
 
 languages = [x for x in dir(targets) if x[0] != '_']
-cms_langs = 'c/cpp/java/pas/py/tex'.split('/')
+cms_langs = 'c/cpp/cs/java/pas/py/tex'.split('/')
 terry_langs = [x for x in languages if x != 'tex']
 
 def replace_section(lines : List[str], target : str, body : str):

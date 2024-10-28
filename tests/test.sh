@@ -29,6 +29,9 @@ function check_cms() {
     echo "CPP..."
     g++ --std=c++11 $dir.cpp -o ${dir}_cpp
     check cpp ./${dir}_cpp
+    echo "CS..."
+    csc $dir.cs | tail -n +4
+    check cs mono $dir.exe
     echo "JAVA..."
     javac $dir.java
     check java java $dir
@@ -41,9 +44,6 @@ function check_cms() {
 }
 
 function check_terry() {
-    echo "CS..."
-    csc $dir.cs | tail -n +4
-    check cs mono $dir.exe
     echo "GO..."
     check go go run $dir.go
     echo "HTML..."

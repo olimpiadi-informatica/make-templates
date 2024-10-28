@@ -132,13 +132,12 @@ def build_block(prog:Block, lang:str):
             s = s[:-1] + "{ %s }\n" % locale[lang][2]
         elif isinstance(c, Instruction):
             for type, ids in pending_declarations:
-                if type in type_vals:
-                    for id in ids:
-                        s += id + " := " + type_vals[type] + ";\n"
-                else:
-                    assert len(ids) == 1
-                    l, t = type[9:].split('] of ')
-                    s += "for i := 0 to %s do %s[i] := %s;\n\n" % (l, ids[0], type_vals[t])
+                for id in ids:
+                    if type in type_vals:
+                            s += id + " := " + type_vals[type] + ";\n"
+                    else:
+                        l, t = type[9:].split('] of ')
+                        s += "for i := 0 to %s do %s[i] := %s;\n" % (l, ids[0], type_vals[t])
 
             pending_declarations = []
             s += "\n"
