@@ -43,9 +43,13 @@ def build_type(t:VarType):
         type = type_dict[type]
     if len(vals) == 0:
         init = "%s"
-    else:
+    elif len(vals) == 1:
         init = "[%%s for i in range(%s)]" % vals[0]
-    init = init % ('[]' if len(vals) > 1 else type_val[t.base])
+    elif len(vals) == 2:
+        init = "[[%%s for j in range(%s)] for i in range(%s)]" % (vals[1], vals[0])
+    else:
+        assert False
+    init = init % type_val[t.base]
     return type, init
 
 def build_reference(r):

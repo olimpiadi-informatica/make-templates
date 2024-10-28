@@ -220,7 +220,7 @@ def build_block(prog:Block, lang:str):
 def generate(name:str, prog:Block, lang:str, bounds:dict):
     if isinstance(prog.code[-1], Repeat):
         rep = prog.code[-1]
-        fmt = rep.code.code[-2].format[1:-1] if isinstance(rep.code.code[-2], FormatLine) else ""
+        fmt = rep.code.code[-2].format[1:-1] if len(rep.code.code) >1 and isinstance(rep.code.code[-2], FormatLine) else ""
         T = rep.bound
         out = rep.code.code[-1]
         prog.code = rep.code.code[1:-2]

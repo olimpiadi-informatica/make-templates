@@ -136,8 +136,21 @@ def build_block(prog:Block, lang:str):
                     if type in type_vals:
                             s += id + " := " + type_vals[type] + ";\n"
                     else:
-                        l, t = type[9:].split('] of ')
-                        s += "for i := 0 to %s do %s[i] := %s;\n" % (l, ids[0], type_vals[t])
+                        dimensions = type.count('Array')
+                        if dimensions == 1:
+                            l, t = type[9:].split('] of ')
+                            s += "for i := 0 to %s do %s[i] := %s;\n" % (l, ids[0], type_vals[t])
+                        elif dimensions == 2:
+                            # Array[0..MAXM-1] of Array[0..MAXN-1] of LongInt
+                            dim1 = type.split('..')[1].split(']')[0]
+                            dim2 = type.split('..')[2].split(']')[0]
+                            t = type.split(' of ')[-1]
+
+                            s += "for i := 0 to %s do begin\n" % dim1
+                            s += indent("    for j := 0 to %s do %s[i][j] := %s;\n" % (dim2, ids[0], type_vals[t]))
+                            s += "end;\n"
+                        else:
+                            assert False
 
             pending_declarations = []
             s += "\n"

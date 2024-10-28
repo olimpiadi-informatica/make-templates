@@ -150,10 +150,6 @@ def build_block(prog:Block, lang:str):
             for type, ids in pending_declarations:
                 if type in type_vals:
                     s += " = ".join([id + ('[0]' if type == "string" else '') for id in ids] + [type_vals[type]]) + ";\n"
-                elif type[:4] == "char":
-                    assert len(ids) == 1
-                    t, l = type[:-1].split('[')
-                    s += "for (i = 0; i < %s; ++i) %s[i] = %s;\n" % (l, ids[0], type_vals[t])
             pending_declarations = []
             s += "\n"
         else:

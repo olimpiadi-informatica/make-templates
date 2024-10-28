@@ -1,0 +1,7 @@
+input:
+
+int N,M;
+
+output:
+
+int W[N][M];

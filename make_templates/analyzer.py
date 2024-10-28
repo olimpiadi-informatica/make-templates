@@ -170,7 +170,7 @@ class Analyzer(IOParserVisitor):
         em, m = self.visitArithExpr(ctx.arithExpr(1))
         type = VarType(t, n, m)
         ref = VarReference(id, 'j')
-        rep = Repeat('j', 0, n.value, Block(InOutSequence(False, type, ref)))
+        rep = Repeat('j', 0, n.value, Block(InOutSequence(self.section == "output", type, ref)))
         return et + en + em + err, Block(VarDeclaration(type, id), rep, Instruction())
 
 
