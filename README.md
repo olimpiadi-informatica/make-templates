@@ -8,9 +8,9 @@ The tool allows to generate from the input/output description:
 
 - `md`: description of the input/output format as Markdown code (especially designed for Terry)
 - `tex`: description of the input/output format as Latex code (especially designed for CMS)
-- solution templates in languages: `c`, `cpp`, `cs`, `eps` ([Executable PseudoCode](https://demo.fibonacci.olinfo.it/ide)), `go`, `html` (form based on Javascript), `java`, `pas`, `py` (Python3)
+- solution templates in languages: `c`, `cpp`, `cs`, `go`, `html` (form based on Javascript), `java`, `pas`, `py` (Python3), `vb`
 
-Template code can be useful for writing solutions and validators, but that adaptation is left to end users. Targets `eps`, `go` and `html` are still under development.
+Template code can be useful for writing solutions and validators, but that adaptation is left to end users.
 
 ### Usage
 
@@ -22,7 +22,7 @@ make-templates [-h] [-l LANG] [-d DESCRIPTION] [--limits LIMITS] [-t] [-c] [-n] 
 
 **Positional arguments:**
 
-- `targets`: Language targets that should be considered (if none specified, the default is c/cpp/java/pas/py/tex for CMS and c/cpp/cs/eps/go/html/java/md/pas/py for Terry)
+- `targets`: Language targets that should be considered (if none specified, the default is c/cpp/cs/java/pas/py/tex for CMS and c/cpp/cs/go/html/java/md/pas/py/vb for Terry)
 
 **Options:**
 
@@ -49,7 +49,7 @@ output:
 int W[N];
 ```
 
-The output description **has to be a single line**, either with a single vector or with some values declared.
+The output description **has to be described with a single line**, with the same syntax as for the input description.
 
 A more complex (and valid) example is:
 
@@ -80,7 +80,7 @@ int matrix[N][M]; // N lines with M integers each
 output:
 
 "Case #{}: " // something to prepend to each test
-int L; string S; long key, value; char letter; double x;
+{int L; string S; long key, value; char letter; double x;}[N];
 ```
 
 ### Further details
@@ -102,7 +102,7 @@ While adding support for a new target language, you should:
 - write the language generator in `make_templates/targets/<lang code>.py`
 - import it in `make_templates/targets/__init__.py`
 - add a test for the language in `tests/test.sh`, function `check_terry`
-- add the long name for the target in dictionary `tnames` in `make_templates/main.py:66`
+- add the long name for the target in dictionary `tnames` in `make_templates/main.py:72`
 - update this README accordingly
 
 Each time a new commit is pushed, a publish action towards [test-pypi](https://test.pypi.org) is triggered. **The action will fail unless the build number in `setup.py` is increased.**
