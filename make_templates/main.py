@@ -91,11 +91,11 @@ def main(args):
     if args.version:
         print("make-templates " + find_version())
         exit(0)
-    # load task.yaml
-    if not path.isfile('task.yaml'):
-        print("[ERROR] File task.yaml not found")
+    # load task yaml
+    if not path.isfile(args.yaml):
+        print("[ERROR] File %s not found" % args.yaml)
         exit(1)
-    task_yaml = yaml.safe_load(''.join(open('task.yaml', 'r').readlines()))
+    task_yaml = yaml.safe_load(''.join(open(args.yaml, 'r').readlines()))
 
     # load input/output description
     if not path.isfile(args.description):
@@ -154,7 +154,7 @@ def main(args):
 
     # load limits file
     if args.limits is None:
-        args.limits = "gen/limiti.py" if format == "cms" else "managers/limits.py"
+        args.limits = "gen/constraints.py" if format == "cms" else "managers/limits.py"
     if not path.isfile(args.limits):
         print(f"[ERROR] File {args.limits} not found")
         exit(1)
@@ -169,7 +169,10 @@ def main(args):
         if t not in dir(targets):
             print(f"[ERROR] Target '{t}' not supported")
             exit(1)
-        name = task_yaml['name']
+        if 'name' in task_yaml:
+            name = task_yaml['name']
+        else:
+            name = path.basename(path.dirname(path.abspath(args.yaml)))
         body = getattr(targets, t).generate(name, deepcopy(res), args.lang, limits.__dict__)
         body = sub('\n +\n', '\n\n', body)
         body = sub('\n +\n', '\n\n', body)
@@ -223,8 +226,13 @@ def script():
         help="path of the file containing the I/O description in SLIDe (defaults to 'inout.slide')",
     )
     parser.add_argument(
+        "-y", "--yaml",
+        default="task.yaml.orig",
+        help="path of the file containing the task description in YAML (defaults to 'task.yaml.orig')",
+    )
+    parser.add_argument(
         "--limits",
-        help="path of the file containing task limits (defaults to 'gen/limiti.py' for CMS and 'managers/limits.py' for Terry)",
+        help="path of the file containing task limits (defaults to 'gen/constraints.py' for CMS and 'managers/limits.py' for Terry)",
     )
     parser.add_argument(
         "-t", "--terry",
