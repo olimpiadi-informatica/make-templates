@@ -6,7 +6,7 @@ fileSpec : NL* ( REPEAT IDENT UPTO IDENT COLON NL )? NL* inputFile NL+ outputFil
 
 inputFile : INPUT COLON NL+ inputLine ( NL+ inputLine )* ;
 
-outputFile: OUTPUT COLON NL+ ( STR NL+ )? outputLine ;
+outputFile: OUTPUT COLON NL+ ( STR NL+ )? outputLine ( NL+ outputLine )*;
 
 inputLine
     : values

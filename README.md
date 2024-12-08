@@ -49,7 +49,7 @@ output:
 int W[N];
 ```
 
-The output description **has to be described with a single line**, with the same syntax as for the input description.
+The output description has the same syntax as for the input description.
 
 A more complex (and valid) example is:
 

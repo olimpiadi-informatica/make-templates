@@ -70,20 +70,27 @@ class Analyzer(IOParserVisitor):
     def visitOutputFile(self, ctx:IOParser.OutputFileContext):
         self.section = "output"
         err = []
-        el, block = self.visitOutputLine(ctx.outputLine())
-        instr = block.code[-2]
-        block.code = block.code[:-2]
-        block.append(Instruction())
-        block.append(Instruction())
-        block.append(UserCode())
-        block.append(Instruction())
-        block.append(Instruction())
+        total_block = Block()
+        block2 = Block()
+        for line in ctx.outputLine():
+            el, block = self.visitOutputLine(line)
+            instr = block.code[-2]
+            block.code = block.code[:-2]
+            block2.append(instr)
+            err += el
+            total_block.append(block)
+
+        total_block.append(Instruction())
+        total_block.append(Instruction())
+        total_block.append(UserCode())
+        total_block.append(Instruction())
+        total_block.append(Instruction())
         if ctx.STR():
             if self.repeatVar is None:
                 err.append('Output header formatter is not allowed without a repeat clause: "%s"' % ctx.STR().getText())
-            block.append(FormatLine(ctx.STR().getText(), self.repeatVar))
-        block.append(instr)
-        return err + el, block
+            total_block.append(FormatLine(ctx.STR().getText(), self.repeatVar))
+        total_block.append(block2)
+        return err, total_block
 
 
     # Visit a parse tree produced by IOParser#inputLine.

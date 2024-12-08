@@ -5,87 +5,87 @@ from ..tree import *
 templates = {"it" : {}, "en" : {}}
 
 templates['it']['rep'] = """
-\InputFile
+\\InputFile
 
 La prima riga del file di input contiene un intero $%s$, il numero di casi di test. Seguono $%s$ casi di test, ognuno preceduto da una riga vuota.
 
 Ogni caso di test è composto come segue:
 \\begin{itemize}
-%s\end{itemize}
+%s\\end{itemize}
 
 
-\OutputFile
+\\OutputFile
 
 Il file di output deve contenere $%s$ righe relative ai diversi casi di test, ciascuna composta da%s
 """
 
 templates['it']['fmt'] = """
-\InputFile
+\\InputFile
 
 La prima riga del file di input contiene un intero $%s$, il numero di casi di test. Seguono $%s$ casi di test, numerati da $1$ a $%s$. Ogni caso di test è preceduto da una riga vuota.
 
 Ogni caso di test è composto come segue:
 \\begin{itemize}
-%s\end{itemize}
+%s\\end{itemize}
 
 
-\OutputFile
+\\OutputFile
 
 Il file di output deve contenere la risposta ai casi di test che sei riuscito a risolvere. Per ogni caso di test che hai risolto, il file di output deve contenere una riga con la dicitura ``\\texttt{%s}'', dove \\texttt{%s} è il numero del caso di test (a partire da $1$), seguita da%s
 """
 
 templates['it']['std'] = """
-\InputFile
+\\InputFile
 
 Il file di input è composto come segue:
 \\begin{itemize}
-%s\end{itemize}
+%s\\end{itemize}
 
 
-\OutputFile
+\\OutputFile
 
 Il file di output deve contenere una riga composta da%s
 """
 
 templates['en']['rep'] = """
-\InputFile
+\\InputFile
 
 The first line of the input file contains a single integer $%s$, the number of test cases. $%s$ test cases follow, each preceded by an empty line.
 
 Each test case consists of:
 \\begin{itemize}
-%s\end{itemize}
+%s\\end{itemize}
 
 
-\OutputFile
+\\OutputFile
 
 The output file must contain $%s$ lines corresponding to the test cases, each consisting of %s
 """
 
 templates['en']['fmt'] = """
-\InputFile
+\\InputFile
 
 The first line of the input file contains a single integer $%s$, the number of test cases. $%s$ test cases follow, numbered from $1$ to $%s$, each preceded by an empty line.
 
 Each test case consists of:
 \\begin{itemize}
-%s\end{itemize}
+%s\\end{itemize}
 
 
-\OutputFile
+\\OutputFile
 
 The output file must contain the answer to the test cases you were able to solve. For each test case you solved, the output file must contain a line with ``\\texttt{%s}'', where \\texttt{%s} is the number of the test case (starting from $1$), followed by %s
 """
 
 templates['en']['std'] = """
-\InputFile
+\\InputFile
 
 The input file consists of:
 \\begin{itemize}
-%s\end{itemize}
+%s\\end{itemize}
 
 
-\OutputFile
+\\OutputFile
 
 The output file must contain a single line consisting of %s
 """
@@ -146,11 +146,11 @@ def build_type(t:VarType):
 
 def build_reference(r):
     if isinstance(r, str):
-        return ("$%s$" if len(r) == 1 else "$\mathtt{%s}$") % r
+        return ("$%s$" if len(r) == 1 else "$\\mathtt{%s}$") % r
     assert isinstance(r, VarReference)
     s = r.name
     if len(s) > 1:
-        s = "\mathtt{%s}" % s
+        s = "\\mathtt{%s}" % s
     if len(r.idx):
         s += "_{%s}" % ','.join(r.idx)
     return "$" + s + "$"
@@ -184,7 +184,7 @@ def build_sequence(basetype:str, typedims:List[Length], ref:VarReference, lang:s
     s += build_reference(typedims[0].value)
     s += " " + (typegender[basetype][2] if lang == "it" else engtypes[basetype]+'s') + " "
     s += build_reference(ref.addIndex('0'))[:-1]
-    s += ", \, \ldots, \, "
+    s += ", \\, \\ldots, \\, "
     ref.idx[-1] = typedims[0].value + "-1"
     s += build_reference(ref)[1:]
     s += ".\n"
@@ -196,7 +196,7 @@ def build_block(prog:Block, lang:str):
         if isinstance(c, VarDeclaration):
             pass
         elif isinstance(c, Repeat):
-            s += "  \item " + build_reference(c.bound) + (" righe, la " if lang == "it" else " lines, the ") + build_reference(c.idx) +  ("-esima contenente " if lang == "it" else "-th of which consisting of ")
+            s += "  \\item " + build_reference(c.bound) + (" righe, la " if lang == "it" else " lines, the ") + build_reference(c.idx) +  ("-esima contenente " if lang == "it" else "-th of which consisting of ")
             if isinstance(c.code.code[0], InOutLine):
                 s += build_inout(c.code.code[0].types, c.code.code[0].items, lang)
             elif isinstance(c.code.code[0], InOutSequence):
@@ -204,9 +204,9 @@ def build_block(prog:Block, lang:str):
             else:
                 assert False
         elif isinstance(c, InOutSequence):
-            s += "  \item " + ("una riga contenente " if lang == "it" else "a line containing ") + build_sequence(c.type.base, c.type.dims, c.var, lang)
+            s += "  \\item " + ("una riga contenente " if lang == "it" else "a line containing ") + build_sequence(c.type.base, c.type.dims, c.var, lang)
         elif isinstance(c, InOutLine):
-            s += "  \item " + ("una riga contenente " if lang == "it" else "a line containing ") + build_inout(c.types, c.items, lang)
+            s += "  \\item " + ("una riga contenente " if lang == "it" else "a line containing ") + build_inout(c.types, c.items, lang)
         elif isinstance(c, FormatLine):
             assert False
         elif isinstance(c, UserCode):

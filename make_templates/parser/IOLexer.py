@@ -1,4 +1,4 @@
-# Generated from /Users/harniver/Git/olimpiadi/make-templates/grammar/IOLexer.g4 by ANTLR 4.13.1
+# Generated from /home/davide/Desktop/olinfo/make-templates/grammar/IOLexer.g4 by ANTLR 4.13.1
 from antlr4 import *
 from io import StringIO
 import sys

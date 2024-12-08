@@ -6,4 +6,5 @@ string N;
 
 output:
 
+int tot;
 int ans, oth; char tag;

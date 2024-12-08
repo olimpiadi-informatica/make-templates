@@ -140,11 +140,11 @@ def build_type(t:VarType):
 
 def build_reference(r):
     if isinstance(r, str):
-        return ("$%s$" if len(r) == 1 else "$\mathtt{%s}$") % r
+        return ("$%s$" if len(r) == 1 else "$\\mathtt{%s}$") % r
     assert isinstance(r, VarReference)
     s = r.name
     if len(s) > 1:
-        s = "\mathtt{%s}" % s
+        s = "\\mathtt{%s}" % s
     if len(r.idx):
         s += "_{%s}" % ','.join(r.idx)
     return "$" + s + "$"
@@ -178,7 +178,7 @@ def build_sequence(basetype:str, typedims:List[Length], ref:VarReference, lang:s
     s += build_reference(typedims[0].value)
     s += " " + (typegender[basetype][2] if lang == "it" else engtypes[basetype]+'s') + " "
     s += build_reference(ref.addIndex('0'))[:-1]
-    s += ", \, \ldots, \, "
+    s += ", \\, \\ldots, \\, "
     ref.idx[-1] = typedims[0].value + "-1"
     s += build_reference(ref)[1:]
     s += ".\n"
