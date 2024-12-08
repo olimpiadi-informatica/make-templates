@@ -4,4 +4,5 @@ int N,M;
 
 output:
 
+int tot;
 int W[N][M];
