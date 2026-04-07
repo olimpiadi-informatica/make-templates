@@ -4,6 +4,7 @@ from . import cs
 from . import go
 from . import html
 from . import java
+from . import js
 from . import md
 from . import pas
 from . import py

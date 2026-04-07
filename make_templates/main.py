@@ -74,8 +74,9 @@ def replace_start(lines : List[str], targets : List[str], lang : str, name : str
         "cpp"  : "C++",
         "cs"   : "C#",
         "go"   : "Go",
-        "html" : "JavaScript",
+        "html" : "JavaScript (HTML)",
         "java" : "Java",
+        "js"   : "JavaScript (wasm-ide)",
         "pas"  : "Pascal",
         "py"   : "Python",
         "vb"   : "VisualBasic"

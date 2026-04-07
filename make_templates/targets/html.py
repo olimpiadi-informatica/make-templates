@@ -185,10 +185,12 @@ def build_reference(r):
 
 def build_declaration(d:VarDeclaration):
     init = build_type(d.type)
-    return 'var ' + ', '.join(n + init for n in d.name) + ';\n'
+    if len(d.type.dims) > 0:
+        return '\n'.join('let %s%s;' % (n, init) for n in d.name) + '\n'
+    return 'let ' + ', '.join(n + init for n in d.name) + ';\n'
 
 def build_for(v:str, k:int, b:str, c:str):
-    return ("for (var %s = %d; %s %s %s; ++%s)" + (" {\n%s}\n" if c.count('\n') > 1 else "\n%s")) % (v, k, v, "<" if k == 0 else "<=", b, v, c)
+    return ("for (let %s = %d; %s %s %s; ++%s)" + (" {\n%s}\n" if c.count('\n') > 1 else "\n%s")) % (v, k, v, "<" if k == 0 else "<=", b, v, c)
 
 def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
     if len(refs) == 0 and not (out and end):
@@ -232,7 +234,7 @@ def build_block(prog:Block, lang:str):
                     pending_declarations[n] = ""
             else:
                 for n in c.name:
-                    pending_declarations[n] = "var "
+                    pending_declarations[n] = "let "
         elif isinstance(c, Repeat):
             ss, tt = build_block(c.code, lang)
             temp = build_for(c.idx, c.start,  c.bound, indent(ss))
@@ -259,7 +261,7 @@ def build_block(prog:Block, lang:str):
             u += "yield `%s`;\n" % c.format[1:-1].replace('{}', '${%s}' % c.var)
         elif isinstance(c, UserCode):
             outsec = True
-            u += "var " + get_output_vars() + " = solve(%s);\n" % (', '.join(input_vars))
+            u += "let " + get_output_vars() + " = solve(%s);\n" % (', '.join(input_vars))
         elif isinstance(c, Instruction):
             if len(s) < 2 or s[-2] != '\n':
                 s += '\n'
