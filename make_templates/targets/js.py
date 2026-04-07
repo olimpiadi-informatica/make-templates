@@ -66,9 +66,10 @@ def build_inout(out:bool, types:List[str], refs:List[VarReference], end:bool):
         return ""
     if out:
         s = " ".join(("${%s}" % build_reference(r)) for r in refs)
-        if end is not None:
-            s += ('\\r\\n' if end else ' ')
-        return "writeln(`%s`);\n" % s
+        if end:
+            return "writeln(`%s`);\n" % s
+        else:
+            return "write(`%s `);\n" % s
     s = ""
     for i in range(len(types)):
         t = types[i]
@@ -123,7 +124,7 @@ def build_block(prog:Block, lang:str):
             else:
                 s += temp
         elif isinstance(c, FormatLine):
-            u += "writeln(`%s`);\n" % c.format[1:-1].replace('{}', '${%s}' % c.var)
+            u += "write(`%s`);\n" % c.format[1:-1].replace('{}', '${%s}' % c.var)
         elif isinstance(c, UserCode):
             outsec = True
             u += "// %s\n\n" % locale[lang][1]
